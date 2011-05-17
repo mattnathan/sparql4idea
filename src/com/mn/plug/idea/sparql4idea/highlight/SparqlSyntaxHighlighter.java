@@ -30,6 +30,7 @@ public class SparqlSyntaxHighlighter extends SyntaxHighlighterBase {
     ATTRIBUTES.put(BAD_CHARACTER, HighlighterColors.BAD_CHARACTER);
     ATTRIBUTES.put(WHITE_SPACE, HighlighterColors.TEXT);
     fillMap(ATTRIBUTES, SparqlTokenTypeSets.KEYWORDS, SyntaxHighlighterColors.KEYWORD);
+    fillMap(ATTRIBUTES, SparqlTokenTypeSets.NUMBER_LITERALS, SyntaxHighlighterColors.NUMBER);
   }
 
   @NotNull

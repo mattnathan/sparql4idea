@@ -47,4 +47,7 @@ public interface SparqlTokenTypes {
 
   IElementType LIT_TRUE = new SparqlElementType("true");
   IElementType LIT_FALSE = new SparqlElementType("false");
+  IElementType LIT_INTEGER = new SparqlElementType("INTEGER");
+  IElementType LIT_DECIMAL = new SparqlElementType("DECIMAL");
+  IElementType LIT_DOUBLE = new SparqlElementType("DOUBLE");
 }

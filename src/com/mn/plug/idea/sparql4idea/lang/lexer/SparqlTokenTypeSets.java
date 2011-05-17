@@ -14,6 +14,7 @@ public interface SparqlTokenTypeSets {
   TokenSet COMMENTS = TokenSet.create();
   TokenSet WHITESPACE = TokenSet.create(WHITE_SPACE);
   TokenSet STRING_LITERALS = TokenSet.create();
+  TokenSet NUMBER_LITERALS = TokenSet.create(LIT_INTEGER, LIT_DECIMAL, LIT_DOUBLE);
   TokenSet KEYWORDS = TokenSet.create(
           KW_BASE,
           KW_PREFIX,

@@ -94,6 +94,10 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
 
   [tT][rR][uU][eE] { return LIT_TRUE; }
   [fF][aA][lL][sS][eE] { return LIT_FALSE; }
+
+  {INTEGER} { return LIT_INTEGER; }
+  {DECIMAL} { return LIT_DECIMAL; }
+  {DOUBLE} { return LIT_DOUBLE; }
 }
 
 {WS} { return WHITE_SPACE; }
