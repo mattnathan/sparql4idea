@@ -13,6 +13,7 @@ public interface SparqlTokenTypes {
   IElementType BAD_CHARACTER = TokenType.BAD_CHARACTER;
   IElementType WHITE_SPACE = TokenType.WHITE_SPACE;
   IElementType UNKNOWN = new SparqlElementType("UNKNOWN");
+  IElementType COMMENT = new SparqlElementType("COMMENT");
 
   // keywords
   IElementType KW_BASE = new SparqlElementType("KW_BASE");

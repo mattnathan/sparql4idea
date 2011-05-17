@@ -32,6 +32,7 @@ public class SparqlSyntaxHighlighter extends SyntaxHighlighterBase {
     fillMap(ATTRIBUTES, SparqlTokenTypeSets.KEYWORDS, SyntaxHighlighterColors.KEYWORD);
     fillMap(ATTRIBUTES, SparqlTokenTypeSets.NUMBER_LITERALS, SyntaxHighlighterColors.NUMBER);
     fillMap(ATTRIBUTES, SparqlTokenTypeSets.STRING_LITERALS, SyntaxHighlighterColors.STRING);
+    fillMap(ATTRIBUTES, SparqlTokenTypeSets.COMMENTS, SyntaxHighlighterColors.LINE_COMMENT);
   }
 
   @NotNull

@@ -11,7 +11,7 @@ import static com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes.*;
  */
 public interface SparqlTokenTypeSets {
 
-  TokenSet COMMENTS = TokenSet.create();
+  TokenSet COMMENTS = TokenSet.create(COMMENT);
   TokenSet WHITESPACE = TokenSet.create(WHITE_SPACE);
   TokenSet STRING_LITERALS = TokenSet.create(LIT_STRING);
   TokenSet NUMBER_LITERALS = TokenSet.create(LIT_INTEGER, LIT_DECIMAL, LIT_DOUBLE);
