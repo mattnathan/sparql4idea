@@ -50,4 +50,26 @@ public interface SparqlTokenTypes {
   IElementType LIT_INTEGER = new SparqlElementType("INTEGER");
   IElementType LIT_DECIMAL = new SparqlElementType("DECIMAL");
   IElementType LIT_DOUBLE = new SparqlElementType("DOUBLE");
+
+  IElementType OP_LROUND = new SparqlElementType("(");
+  IElementType OP_RROUND = new SparqlElementType(")");
+  IElementType OP_LSQUARE = new SparqlElementType("[");
+  IElementType OP_RSQUARE = new SparqlElementType("]");
+  IElementType OP_LCURLY = new SparqlElementType("{");
+  IElementType OP_RCURLY = new SparqlElementType("}");
+  IElementType OP_DOT = new SparqlElementType(".");
+  IElementType OP_SEMI = new SparqlElementType(";");
+  IElementType OP_COMMA = new SparqlElementType(",");
+  IElementType OP_PIPEPIPE = new SparqlElementType("||");
+  IElementType OP_ANDAND = new SparqlElementType("&&");
+  IElementType OP_EQ = new SparqlElementType("=");
+  IElementType OP_NE = new SparqlElementType("!=");
+  IElementType OP_LT = new SparqlElementType("<");
+  IElementType OP_RT = new SparqlElementType(">");
+  IElementType OP_LE = new SparqlElementType("<=");
+  IElementType OP_GE = new SparqlElementType(">=");
+  IElementType OP_PLUS = new SparqlElementType("+");
+  IElementType OP_MINUS = new SparqlElementType("-");
+  IElementType OP_NOT = new SparqlElementType("!");
+  IElementType OP_HATHAT = new SparqlElementType("^^");
 }

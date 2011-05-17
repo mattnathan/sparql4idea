@@ -98,6 +98,29 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
   {INTEGER} { return LIT_INTEGER; }
   {DECIMAL} { return LIT_DECIMAL; }
   {DOUBLE} { return LIT_DOUBLE; }
+
+  "(" { return OP_LROUND; }
+  ")" { return OP_RROUND; }
+  "{" { return OP_LCURLY; }
+  "}" { return OP_RCURLY; }
+  "[" { return OP_LSQUARE; }
+  "]" { return OP_RSQUARE; }
+  
+  "." { return OP_DOT; }
+  ";" { return OP_SEMI; }
+  "," { return OP_COMMA; }
+  "||" { return OP_PIPEPIPE; }
+  "&&" { return OP_ANDAND; }
+  "=" { return OP_EQ; }
+  "!=" { return OP_NE; }
+  "<" { return OP_LT; }
+  ">" { return OP_RT; }
+  "<=" { return OP_LE; }
+  ">=" { return OP_GE; }
+  "+" { return OP_PLUS; }
+  "-" { return OP_MINUS; }
+  "!" { return OP_NOT; }
+  "^^" { return OP_HATHAT; }
 }
 
 {WS} { return WHITE_SPACE; }
