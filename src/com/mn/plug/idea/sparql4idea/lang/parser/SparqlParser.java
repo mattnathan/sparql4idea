@@ -99,11 +99,31 @@ public class SparqlParser implements PsiParser {
       return;
     }
 
+    // TriplesBlock?
+    parseOptTriplesBlock(builder);
+
     while (!builder.eof() && builder.getTokenType() != OP_RCURLY) {
       builder.advanceLexer();
     }
     if (!builder.eof()) {
       builder.advanceLexer();
+    }
+  }
+
+  private void parseOptTriplesBlock(PsiBuilder builder) {
+    if (builder.getTokenType() == VAR ||
+            builder.getTokenType() == LIT_IRI ||
+            builder.getTokenType() == LIT_TRUE ||
+            builder.getTokenType() == LIT_FALSE ||
+            builder.getTokenType() == LIT_INTEGER ||
+            builder.getTokenType() == LIT_DECIMAL ||
+            builder.getTokenType() == LIT_DOUBLE ||
+            builder.getTokenType() == LIT_BLANK_NODE ||
+            builder.getTokenType() == LIT_NIL ||
+            builder.getTokenType() == LIT_STRING ||
+            builder.getTokenType() == OP_LROUND ||
+            builder.getTokenType() == OP_LSQUARE) {
+      // should be in TriplesBlock now
     }
   }
 
