@@ -50,6 +50,7 @@ public interface SparqlTokenTypes {
   IElementType LIT_INTEGER = new SparqlElementType("INTEGER");
   IElementType LIT_DECIMAL = new SparqlElementType("DECIMAL");
   IElementType LIT_DOUBLE = new SparqlElementType("DOUBLE");
+  IElementType LIT_IRI = new SparqlElementType("IRI");
 
   IElementType OP_LROUND = new SparqlElementType("(");
   IElementType OP_RROUND = new SparqlElementType(")");

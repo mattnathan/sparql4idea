@@ -16,7 +16,7 @@ import static com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes.*;
 %type IElementType
 
 
-IRI_REF = "<"([^\<\>\"\{\}\|\^\`\\]-[#x00-#x20])*">"
+IRI_REF = "<"([^\<\>\"\{\}\|\^\`\\\x00-\x20])*">"
 PNAME_NS = {PN_PREFIX}? ":"
 PNAME_LN = {PNAME_NS} {PN_LOCAL}
 BLANK_NODE_LABEL = "_:" {PN_LOCAL}
@@ -123,6 +123,8 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
   "/" { return OP_DIV; }
   "!" { return OP_NOT; }
   "^^" { return OP_HATHAT; }
+
+  {IRI_REF} { return LIT_IRI; }
 }
 
 {WS} { return WHITE_SPACE; }
