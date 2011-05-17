@@ -98,6 +98,12 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
   {INTEGER} { return LIT_INTEGER; }
   {DECIMAL} { return LIT_DECIMAL; }
   {DOUBLE} { return LIT_DOUBLE; }
+  {INTEGER_POSITIVE} { return LIT_INTEGER; }
+  {INTEGER_NEGATIVE} { return LIT_INTEGER; }
+  {DECIMAL_POSITIVE} { return LIT_DECIMAL; }
+  {DECIMAL_NEGATIVE} { return LIT_DECIMAL; }
+  {DOUBLE_POSITIVE} { return LIT_DOUBLE; }
+  {DOUBLE_NEGATIVE} { return LIT_DOUBLE; }
 
   "(" { return OP_LROUND; }
   ")" { return OP_RROUND; }
@@ -125,6 +131,7 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
   "^^" { return OP_HATHAT; }
 
   {IRI_REF} { return LIT_IRI; }
+  {PNAME_LN}|{PNAME_NS} { return LIT_PNAME; }
 }
 
 {WS} { return WHITE_SPACE; }
