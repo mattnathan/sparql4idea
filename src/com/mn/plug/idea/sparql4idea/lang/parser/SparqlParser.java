@@ -7,10 +7,8 @@ import com.intellij.psi.tree.IElementType;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
 import org.jetbrains.annotations.NotNull;
 
-import static com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes.LIT_IRI;
-import static com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes.LIT_PNAME_NS;
-import static com.mn.plug.idea.sparql4idea.lang.parser.SparqlElementTypes.BASE_DECL;
-import static com.mn.plug.idea.sparql4idea.lang.parser.SparqlElementTypes.PREFIX_DECL;
+import static com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes.*;
+import static com.mn.plug.idea.sparql4idea.lang.parser.SparqlElementTypes.*;
 
 /**
  * Parser implementation for SPARQL files
@@ -36,6 +34,98 @@ public class SparqlParser implements PsiParser {
 
   private void parseQuery(PsiBuilder builder) {
     parsePrologue(builder);
+
+    if (builder.getTokenType() == KW_SELECT) {
+      parseSelectQuery(builder);
+    } else if (builder.getTokenType() == KW_CONSTRUCT) {
+
+    } else if (builder.getTokenType() == KW_DESCRIBE) {
+
+    } else if (builder.getTokenType() == KW_ASK) {
+
+    }
+  }
+
+  private void parseSelectQuery(PsiBuilder builder) {
+    assert builder.getTokenType() == KW_SELECT;
+
+    final PsiBuilder.Marker selectQuery = builder.mark();
+    builder.advanceLexer();
+
+    if (builder.getTokenType() == KW_DISTINCT ||
+            builder.getTokenType() == KW_REDUCED) {
+      builder.advanceLexer();
+    }
+
+    if (builder.getTokenType() == OP_MULT) {
+      builder.advanceLexer();
+    } else if (builder.getTokenType() == VAR) {
+      builder.advanceLexer();
+
+      while (builder.getTokenType() == VAR) {
+        builder.advanceLexer();
+      }
+    } else {
+      builder.error("Expecting VAR or *");
+    }
+
+    while (builder.getTokenType() == KW_FROM) {
+      parseDatasetClause(builder);
+    }
+
+    parseWhereClause(builder);
+
+    selectQuery.done(SELECT_QUERY);
+
+  }
+
+  private void parseWhereClause(PsiBuilder builder) {
+    final PsiBuilder.Marker whereClause = builder.mark();
+
+    if (builder.getTokenType() == KW_WHERE) {
+      builder.advanceLexer();
+    }
+
+    parseGroupGraphPattern(builder);
+
+    whereClause.done(WHERE_CLAUSE);
+  }
+
+  private void parseGroupGraphPattern(PsiBuilder builder) {
+    if (builder.getTokenType() == OP_LCURLY) {
+      builder.advanceLexer();
+    } else {
+      builder.error("Expecting '{'");
+      return;
+    }
+
+    while (!builder.eof() && builder.getTokenType() != OP_RCURLY) {
+      builder.advanceLexer();
+    }
+    if (!builder.eof()) {
+      builder.advanceLexer();
+    }
+  }
+
+  private void parseDatasetClause(PsiBuilder builder) {
+    assert builder.getTokenType() == KW_FROM;
+
+    final PsiBuilder.Marker datasetClause = builder.mark();
+    builder.advanceLexer();
+
+    if (builder.getTokenType() == KW_NAMED) {
+      builder.advanceLexer();
+    }
+
+    if (builder.getTokenType() == LIT_IRI ||
+            builder.getTokenType() == LIT_PNAME_LN ||
+            builder.getTokenType() == LIT_PNAME_NS) {
+      builder.advanceLexer();
+    } else {
+      builder.error("Expecting IRI_REF, PNAME_LN or PNAME_NS");
+    }
+
+    datasetClause.done(DATASET_CLAUSE);
   }
 
   private void parsePrologue(PsiBuilder builder) {
