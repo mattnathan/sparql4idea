@@ -66,6 +66,7 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
   [sS][eE][lL][eE][cC][tT] { return KW_SELECT; }
   [cC][oO][nN][sS][tT][rR][uU][cC][tT] { return KW_CONSTRUCT; }
   [dD][eE][sS][cC][rR][iI][bB][eE] { return KW_DESCRIBE; }
+  [aA][sS][kK] { return KW_ASK; }
   [oO][rR][dD][eE][rR] { return KW_ORDER; }
   [bB][yY] { return KW_BY; }
   [lL][iI][mM][iI][tT] { return KW_LIMIT; }
@@ -90,6 +91,9 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
   [iI][sS][iI][rR][iI] { return KW_IS_IRI; }
   [iI][sS][lL][iI][tT][eE][rR][aA][lL] { return KW_IS_LITERAL; }
   [rR][eE][gG][eE][xX] { return KW_REGEX; }
+
+  [tT][rR][uU][eE] { return LIT_TRUE; }
+  [fF][aA][lL][sS][eE] { return LIT_FALSE; }
 }
 
 {WS} { return WHITE_SPACE; }

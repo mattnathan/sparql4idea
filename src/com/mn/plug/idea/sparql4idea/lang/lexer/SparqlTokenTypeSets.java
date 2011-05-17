@@ -20,6 +20,7 @@ public interface SparqlTokenTypeSets {
           KW_SELECT,
           KW_CONSTRUCT,
           KW_DESCRIBE,
+          KW_ASK,
           KW_ORDER,
           KW_BY,
           KW_LIMIT,

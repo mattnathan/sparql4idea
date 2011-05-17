@@ -19,6 +19,7 @@ public interface SparqlTokenTypes {
   IElementType KW_SELECT = new SparqlElementType("KW_SELECT");
   IElementType KW_CONSTRUCT = new SparqlElementType("KW_CONSTRUCT");
   IElementType KW_DESCRIBE = new SparqlElementType("KW_DESCRIBE");
+  IElementType KW_ASK = new SparqlElementType("KW_ASK");
   IElementType KW_ORDER = new SparqlElementType("KW_ORDER");
   IElementType KW_BY = new SparqlElementType("KW_BY");
   IElementType KW_LIMIT = new SparqlElementType("KW_LIMIT");

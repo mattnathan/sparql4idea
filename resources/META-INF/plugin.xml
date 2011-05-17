@@ -22,6 +22,8 @@
     <fileTypeFactory implementation="com.mn.plug.idea.sparql4idea.SparqlFileTypeFactory" />
     <syntaxHighlighter key="SPARQL"
                        implementationClass="com.mn.plug.idea.sparql4idea.highlight.SparqlSyntaxHighlighter" />
+    <lang.parserDefinition language="SPARQL"
+                           implementationClass="com.mn.plug.idea.sparql4idea.lang.parser.SparqlParserDefinition" />
     <lang.commenter language="SPARQL" implementationClass="com.mn.plug.idea.sparql4idea.highlight.SparqlCommenter" />
   </extensions>
 </idea-plugin>
