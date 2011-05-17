@@ -132,7 +132,15 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
 
   {IRI_REF} { return LIT_IRI; }
   {PNAME_LN}|{PNAME_NS} { return LIT_PNAME; }
+  {BLANK_NODE_LABEL} { return LIT_BLANK_NODE; }
+  {ANON} { return LIT_ANON; }
+  {NIL} { return LIT_NIL; }
+  {LANGTAG} { return LANGTAG; }
+
+  {VAR1}|{VAR2} { return VAR; }
+  {STRING_LITERAL1}|{STRING_LITERAL2}|{STRING_LITERAL_LONG1}|{STRING_LITERAL_LONG2} { return LIT_STRING; }
 }
 
 {WS} { return WHITE_SPACE; }
+[a-zA-Z]+ { return BAD_CHARACTER; }
 [^] { return BAD_CHARACTER; }

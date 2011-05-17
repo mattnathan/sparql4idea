@@ -47,11 +47,17 @@ public interface SparqlTokenTypes {
 
   IElementType LIT_TRUE = new SparqlElementType("true");
   IElementType LIT_FALSE = new SparqlElementType("false");
+  IElementType LIT_STRING = new SparqlElementType("STRING");
   IElementType LIT_INTEGER = new SparqlElementType("INTEGER");
   IElementType LIT_DECIMAL = new SparqlElementType("DECIMAL");
   IElementType LIT_DOUBLE = new SparqlElementType("DOUBLE");
   IElementType LIT_IRI = new SparqlElementType("IRI");
   IElementType LIT_PNAME = new SparqlElementType("PNAME");
+  IElementType LIT_BLANK_NODE = new SparqlElementType("BLANK_NODE");
+  IElementType LIT_ANON = new SparqlElementType("ANON");
+  IElementType LIT_NIL = new SparqlElementType("NIL");
+  IElementType VAR = new SparqlElementType("VAR");
+  IElementType LANGTAG = new SparqlElementType("LANGTAG");
 
   IElementType OP_LROUND = new SparqlElementType("(");
   IElementType OP_RROUND = new SparqlElementType(")");
