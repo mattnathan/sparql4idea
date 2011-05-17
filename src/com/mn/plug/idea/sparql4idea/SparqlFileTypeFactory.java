@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 public class SparqlFileTypeFactory extends FileTypeFactory {
 
   @Override
-  public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {
-
+  public void createFileTypes(@NotNull FileTypeConsumer consumer) {
+    consumer.consume(SparqlFileType.SPARQL_FILE_TYPE, "sparql");
   }
 }
