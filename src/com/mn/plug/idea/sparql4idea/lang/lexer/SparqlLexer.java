@@ -3,6 +3,8 @@ package com.mn.plug.idea.sparql4idea.lang.lexer;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.FlexLexer;
 
+import java.io.Reader;
+
 /**
  * General lexer for sparql language
  *
@@ -11,7 +13,6 @@ import com.intellij.lexer.FlexLexer;
 public class SparqlLexer extends FlexAdapter {
 
   public SparqlLexer() {
-    // todo: add the proper lexer
-    super(null);
+    super(new _SparqlLexer((Reader) null));
   }
 }

@@ -3,6 +3,8 @@ package com.mn.plug.idea.sparql4idea.lang.lexer;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 
+import static com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes.*;
+
 %%
 
 %class _SparqlLexer
@@ -14,7 +16,7 @@ import com.intellij.psi.tree.IElementType;
 %type IElementType
 
 
-IRI_REF = "<"([^<>\"{}|^`\\]-[#x00-#x20])*">"
+IRI_REF = "<"([^\<\>\"\{\}\|\^\`\\]-[#x00-#x20])*">"
 PNAME_NS = {PN_PREFIX}? ":"
 PNAME_LN = {PNAME_NS} {PN_LOCAL}
 BLANK_NODE_LABEL = "_:" {PN_LOCAL}
@@ -37,12 +39,14 @@ DOUBLE_NEGATIVE = "-"{DOUBLE}
 
 EXPONENT = [eE] [+-]? [0-9]+
 
+// strings
 STRING_LITERAL1 = "'" ( ([^\x27\x5C\x0A\x0D]) | {ECHAR} )* "'"
 STRING_LITERAL2 = "\"" ( ([^\x22\x5C\x0A\x0D]) | {ECHAR} )* "\""
 STRING_LITERAL_LONG1 = "'''" ( ( "'" | "''" )? ( [^'\\] | {ECHAR} ) )* "'''"
 STRING_LITERAL_LONG2 = "\"\"\"" ( ( "\"" | "\"\"" )? ( [^\"\\] | {ECHAR} ) )* "\"\"\""
-
 ECHAR = [\\][tbnrf\\\"\']
+
+// character sets etc
 NIL = "("{WS}*")"
 WS = [\x20\x09\x0D\x0A]
 ANON = "["{WS}*"]"
@@ -55,3 +59,38 @@ PN_PREFIX = {PN_CHARS_BASE} (({PN_CHARS}|".")* {PN_CHARS})?
 PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
 
 %%
+
+<YYINITIAL> {
+  [bB][aA][sS][eE] { return KW_BASE; }
+  [pP][rR][eE][fF][iI][xX] { return KW_PREFIX; }
+  [sS][eE][lL][eE][cC][tT] { return KW_SELECT; }
+  [cC][oO][nN][sS][tT][rR][uU][cC][tT] { return KW_CONSTRUCT; }
+  [dD][eE][sS][cC][rR][iI][bB][eE] { return KW_DESCRIBE; }
+  [oO][rR][dD][eE][rR] { return KW_ORDER; }
+  [bB][yY] { return KW_BY; }
+  [lL][iI][mM][iI][tT] { return KW_LIMIT; }
+  [oO][fF][fF][sS][eE][tT] { return KW_OFFSET; }
+  [dD][iI][sS][tT][iI][nN][cC][tT] { return KW_DISTINCT; }
+  [rR][eE][dD][uU][cC][eE][dD] { return KW_REDUCED; }
+  [fF][rR][dO][mM] { return KW_FROM; }
+  [nN][aA][mM][eE][dD] { return KW_NAMED; }
+  [wW][hH][eE][rR][eE] { return KW_WHERE; }
+  [gG][rR][aA][pP][hH] { return KW_GRAPH; }
+  [oO][pP][tT][iI][oO][nN][aA][lL] { return KW_OPTIONAL; }
+  [uU][nN][iI][oO][nN] { return KW_UNION; }
+  [fF][iI][lL][tT][eE][rR] { return KW_FILTER; }
+  "a" { return KW_A; }
+  [sS][tT][rR] { return KW_STR; }
+  [lL][aA][nN][gG] { return KW_LANG; }
+  [lL][aA][nN][gG][mM][sA][tT][cC][hH][eE][sS] { return KW_LANGMATCHES; }
+  [dD][aA][tT][aA][tT][yY][pP][eE] { return KW_DATATYPE; }
+  [bB][oO][uU][nN][dD] { return KW_BOUND; }
+  [sS][aA][mM][eE][tT][eE][rR][mM] { return KW_SAME_TERM; }
+  [iI][sS][uU][rR][iI] { return KW_IS_URI; }
+  [iI][sS][iI][rR][iI] { return KW_IS_IRI; }
+  [iI][sS][lL][iI][tT][eE][rR][aA][lL] { return KW_IS_LITERAL; }
+  [rR][eE][gG][eE][xX] { return KW_REGEX; }
+}
+
+{WS} { return WHITE_SPACE; }
+[^] { return BAD_CHARACTER; }
