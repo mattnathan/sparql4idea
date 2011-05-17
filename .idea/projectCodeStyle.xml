@@ -15,6 +15,7 @@
             <option name="USE_RELATIVE_INDENTS" value="false" />
           </value>
         </option>
+        <option name="XML_SPACE_INSIDE_EMPTY_TAG" value="true" />
         <option name="KEEP_BLANK_LINES_IN_DECLARATIONS" value="1" />
         <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
         <option name="KEEP_BLANK_LINES_BEFORE_RBRACE" value="1" />
