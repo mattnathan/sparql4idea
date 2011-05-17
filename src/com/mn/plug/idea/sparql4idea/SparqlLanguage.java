@@ -9,7 +9,7 @@ import com.intellij.lang.Language;
  */
 public class SparqlLanguage extends Language {
 
-    protected SparqlLanguage() {
-        super("SPARQL");
-    }
+  protected SparqlLanguage() {
+    super("SPARQL");
+  }
 }

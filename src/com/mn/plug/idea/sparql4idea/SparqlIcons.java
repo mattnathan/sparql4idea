@@ -11,6 +11,6 @@ import javax.swing.*;
  */
 public interface SparqlIcons {
 
-    Icon XQUERY_ICON_16x16 = IconLoader.getIcon("/icons/fileicon-16x16.png");
+  Icon XQUERY_ICON_16x16 = IconLoader.getIcon("/icons/fileicon-16x16.png");
 
 }
