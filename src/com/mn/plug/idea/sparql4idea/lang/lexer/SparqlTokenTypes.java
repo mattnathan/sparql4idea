@@ -70,6 +70,8 @@ public interface SparqlTokenTypes {
   IElementType OP_GE = new SparqlElementType(">=");
   IElementType OP_PLUS = new SparqlElementType("+");
   IElementType OP_MINUS = new SparqlElementType("-");
+  IElementType OP_MULT = new SparqlElementType("*");
+  IElementType OP_DIV = new SparqlElementType("/");
   IElementType OP_NOT = new SparqlElementType("!");
   IElementType OP_HATHAT = new SparqlElementType("^^");
 }

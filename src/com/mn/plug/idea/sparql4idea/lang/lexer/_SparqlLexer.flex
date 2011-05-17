@@ -119,6 +119,8 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
   ">=" { return OP_GE; }
   "+" { return OP_PLUS; }
   "-" { return OP_MINUS; }
+  "*" { return OP_MULT; }
+  "/" { return OP_DIV; }
   "!" { return OP_NOT; }
   "^^" { return OP_HATHAT; }
 }
