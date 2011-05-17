@@ -19,6 +19,8 @@
   </actions>
 
   <extensions defaultExtensionNs="com.intellij">
-    <fileTypeFactory implementation="com.mn.plug.idea.sparql4idea.SparqlFileTypeFactory" />
+    <fileTypeFactory implementation="com.mn.plug.idea.sparql4idea.SparqlFileTypeFactory"/>
+
+    <lang.commenter language="SPARQL" implementationClass="com.mn.plug.idea.sparql4idea.highlight.SparqlCommenter"/>
   </extensions>
 </idea-plugin>
