@@ -54,7 +54,8 @@ public interface SparqlTokenTypes {
   IElementType LIT_DECIMAL = new SparqlElementType("DECIMAL");
   IElementType LIT_DOUBLE = new SparqlElementType("DOUBLE");
   IElementType LIT_IRI = new SparqlElementType("IRI");
-  IElementType LIT_PNAME = new SparqlElementType("PNAME");
+  IElementType LIT_PNAME_LN = new SparqlElementType("PNAME_NS");
+  IElementType LIT_PNAME_NS = new SparqlElementType("PNAME_LN");
   IElementType LIT_BLANK_NODE = new SparqlElementType("BLANK_NODE");
   IElementType LIT_ANON = new SparqlElementType("ANON");
   IElementType LIT_NIL = new SparqlElementType("NIL");
