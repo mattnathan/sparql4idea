@@ -2,6 +2,7 @@ package com.mn.plug.idea.sparql4idea.lang.parser.parsing.lit;
 
 import com.intellij.lang.PsiBuilder;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
+import com.mn.plug.idea.sparql4idea.lang.parser.parsing.common.GraphNode;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
 
 /**
@@ -61,5 +62,45 @@ public class Literals {
 
   public static boolean parseNil(PsiBuilder builder) {
     return ParserUtils.getToken(builder, SparqlTokenTypes.LIT_NIL);
+  }
+
+  public static boolean parseVarOrIriRef(PsiBuilder builder) {
+    return ParserUtils.getToken(builder, SparqlTokenTypes.VAR) ||
+            parseIriRef(builder);
+  }
+
+  public static boolean parseVarOrTerm(PsiBuilder builder) {
+    if (ParserUtils.lookAhead(builder, SparqlTokenTypes.VAR)) {
+      builder.advanceLexer();
+      return true;
+    } else if (parseGraphTerm(builder)) {
+      return true;
+    }
+    return false;
+  }
+
+  public static boolean parseGraphTerm(PsiBuilder builder) {
+    return parseIriRef(builder) ||
+            parseRdfLiteral(builder) ||
+            parseNumericLiteral(builder) ||
+            parseBooleanLiteral(builder) ||
+            parseBlankNode(builder) ||
+            parseNil(builder);
+  }
+
+  public static boolean parseCollection(PsiBuilder builder) {
+    if (ParserUtils.getToken(builder, SparqlTokenTypes.OP_LROUND)) {
+
+      if (!GraphNode.parse(builder)) {
+        builder.error("Expecting Graph Node");
+      } else {
+        //noinspection StatementWithEmptyBody
+        while (GraphNode.parse(builder)) ;
+      }
+
+      ParserUtils.getToken(builder, SparqlTokenTypes.OP_RROUND, "Expecting ')'");
+      return true;
+    }
+    return false;
   }
 }
