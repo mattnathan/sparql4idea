@@ -4,8 +4,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
-import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
-import com.mn.plug.idea.sparql4idea.lang.parser.parsing.toplevel.Prologue;
+import com.mn.plug.idea.sparql4idea.lang.parser.parsing.toplevel.Query;
 import org.jetbrains.annotations.NotNull;
 
 import static com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes.*;
@@ -23,7 +22,7 @@ public class SparqlParser implements PsiParser {
   public ASTNode parse(IElementType root, PsiBuilder builder) {
     PsiBuilder.Marker mark = builder.mark();
 
-    parseQuery(builder);
+    Query.parse(builder);
 
     while (!builder.eof()) {
       builder.advanceLexer();
@@ -31,20 +30,6 @@ public class SparqlParser implements PsiParser {
     mark.done(root);
 
     return builder.getTreeBuilt();
-  }
-
-  private void parseQuery(PsiBuilder builder) {
-    Prologue.parse(builder);
-
-    if (builder.getTokenType() == KW_SELECT) {
-      parseSelectQuery(builder);
-    } else if (builder.getTokenType() == KW_CONSTRUCT) {
-
-    } else if (builder.getTokenType() == KW_DESCRIBE) {
-
-    } else if (builder.getTokenType() == KW_ASK) {
-
-    }
   }
 
   private void parseSelectQuery(PsiBuilder builder) {
