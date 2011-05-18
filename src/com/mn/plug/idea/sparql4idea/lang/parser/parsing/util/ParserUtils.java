@@ -52,6 +52,17 @@ public class ParserUtils {
    * Checks, that following element sequence is like given
    *
    * @param builder Given PsiBuilder
+   * @param elem    Need element
+   * @return true if following sequence is like a given
+   */
+  public static boolean lookAhead(PsiBuilder builder, IElementType elem) {
+    return elem.equals(builder.getTokenType());
+  }
+
+  /**
+   * Checks, that following element sequence is like given
+   *
+   * @param builder Given PsiBuilder
    * @param elems   Array of need elements in order
    * @return true if following sequence is like a given
    */
