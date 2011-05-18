@@ -2,7 +2,7 @@ package com.mn.plug.idea.sparql4idea.lang.parser.parsing.lit;
 
 import com.intellij.lang.PsiBuilder;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
-import com.mn.plug.idea.sparql4idea.lang.parser.parsing.common.GraphNode;
+import com.mn.plug.idea.sparql4idea.lang.parser.parsing.graph.GraphNode;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
 
 /**
