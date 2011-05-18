@@ -35,7 +35,7 @@ public class Select {
 
       WhereClause.parse(builder);
 
-      SolutionModifiers.parseOrderClause(builder);
+      SolutionModifiers.parse(builder);
     }
     selectQuery.done(SparqlElementTypes.SELECT_QUERY);
   }
