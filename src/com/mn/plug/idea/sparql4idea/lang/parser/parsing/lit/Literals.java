@@ -2,7 +2,9 @@ package com.mn.plug.idea.sparql4idea.lang.parser.parsing.lit;
 
 import com.intellij.lang.PsiBuilder;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
+import com.mn.plug.idea.sparql4idea.lang.parser.SparqlElementTypes;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.graph.GraphNode;
+import com.mn.plug.idea.sparql4idea.lang.parser.parsing.graph.Graphs;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
 
 /**
@@ -47,7 +49,20 @@ public class Literals {
   public static boolean parseNumericLiteral(PsiBuilder builder) {
     return ParserUtils.getToken(builder, SparqlTokenTypes.LIT_INTEGER) ||
             ParserUtils.getToken(builder, SparqlTokenTypes.LIT_DECIMAL) ||
-            ParserUtils.getToken(builder, SparqlTokenTypes.LIT_DOUBLE);
+            ParserUtils.getToken(builder, SparqlTokenTypes.LIT_DOUBLE) ||
+            parseNumericLiteralNeg(builder) || parseNumericLiteralPos(builder);
+  }
+
+  public static boolean parseNumericLiteralPos(PsiBuilder builder) {
+    return ParserUtils.getToken(builder, SparqlTokenTypes.LIT_INTEGER_POS) ||
+            ParserUtils.getToken(builder, SparqlTokenTypes.LIT_DECIMAL_POS) ||
+            ParserUtils.getToken(builder, SparqlTokenTypes.LIT_DOUBLE_POS);
+  }
+
+  public static boolean parseNumericLiteralNeg(PsiBuilder builder) {
+    return ParserUtils.getToken(builder, SparqlTokenTypes.LIT_INTEGER_NEG) ||
+            ParserUtils.getToken(builder, SparqlTokenTypes.LIT_DECIMAL_NEG) ||
+            ParserUtils.getToken(builder, SparqlTokenTypes.LIT_DOUBLE_NEG);
   }
 
   public static boolean parseBooleanLiteral(PsiBuilder builder) {
@@ -65,27 +80,25 @@ public class Literals {
   }
 
   public static boolean parseVarOrIriRef(PsiBuilder builder) {
-    return ParserUtils.getToken(builder, SparqlTokenTypes.VAR) ||
+    return parseVar(builder) ||
             parseIriRef(builder);
   }
 
-  public static boolean parseVarOrTerm(PsiBuilder builder) {
+  public static boolean parseVar(PsiBuilder builder) {
     if (ParserUtils.lookAhead(builder, SparqlTokenTypes.VAR)) {
-      builder.advanceLexer();
-      return true;
-    } else if (parseGraphTerm(builder)) {
+      ParserUtils.eatElement(builder, SparqlElementTypes.VARIABLE);
       return true;
     }
     return false;
   }
 
-  public static boolean parseGraphTerm(PsiBuilder builder) {
-    return parseIriRef(builder) ||
-            parseRdfLiteral(builder) ||
-            parseNumericLiteral(builder) ||
-            parseBooleanLiteral(builder) ||
-            parseBlankNode(builder) ||
-            parseNil(builder);
+  public static boolean parseVarOrTerm(PsiBuilder builder) {
+    if (parseVar(builder)) {
+      return true;
+    } else if (Graphs.parseGraphTerm(builder)) {
+      return true;
+    }
+    return false;
   }
 
   public static boolean parseCollection(PsiBuilder builder) {

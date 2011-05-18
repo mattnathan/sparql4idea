@@ -14,6 +14,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.mn.plug.idea.sparql4idea.SparqlFileType;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlLexer;
 import com.mn.plug.idea.sparql4idea.lang.psi.SparqlFileImpl;
+import com.mn.plug.idea.sparql4idea.lang.psi.VariablePsiElement;
 import com.mn.plug.idea.sparql4idea.lang.psi.toplevel.PrefixPsiElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -67,6 +68,8 @@ public class SparqlParserDefinition implements ParserDefinition {
   public PsiElement createElement(ASTNode astNode) {
     if (astNode.getElementType() == SparqlElementTypes.PREFIX_DECL) {
       return new PrefixPsiElement(astNode);
+    } else if (astNode.getElementType() == SparqlElementTypes.VARIABLE) {
+      return new VariablePsiElement(astNode);
     }
 
     return new ASTWrapperPsiElement(astNode);

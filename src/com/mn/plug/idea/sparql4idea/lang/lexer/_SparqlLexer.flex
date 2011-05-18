@@ -89,6 +89,7 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
   [sS][aA][mM][eE][tT][eE][rR][mM] { return KW_SAME_TERM; }
   [iI][sS][uU][rR][iI] { return KW_IS_URI; }
   [iI][sS][iI][rR][iI] { return KW_IS_IRI; }
+  [iI][sS][bB][lL][aA][nN][kK] { return KW_IS_BLANK; }
   [iI][sS][lL][iI][tT][eE][rR][aA][lL] { return KW_IS_LITERAL; }
   [rR][eE][gG][eE][xX] { return KW_REGEX; }
 
@@ -98,12 +99,12 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
   {INTEGER} { return LIT_INTEGER; }
   {DECIMAL} { return LIT_DECIMAL; }
   {DOUBLE} { return LIT_DOUBLE; }
-  {INTEGER_POSITIVE} { return LIT_INTEGER; }
-  {INTEGER_NEGATIVE} { return LIT_INTEGER; }
-  {DECIMAL_POSITIVE} { return LIT_DECIMAL; }
-  {DECIMAL_NEGATIVE} { return LIT_DECIMAL; }
-  {DOUBLE_POSITIVE} { return LIT_DOUBLE; }
-  {DOUBLE_NEGATIVE} { return LIT_DOUBLE; }
+  {INTEGER_POSITIVE} { return LIT_INTEGER_POS; }
+  {INTEGER_NEGATIVE} { return LIT_INTEGER_NEG; }
+  {DECIMAL_POSITIVE} { return LIT_DECIMAL_POS; }
+  {DECIMAL_NEGATIVE} { return LIT_DECIMAL_NEG; }
+  {DOUBLE_POSITIVE} { return LIT_DOUBLE_POS; }
+  {DOUBLE_NEGATIVE} { return LIT_DOUBLE_NEG; }
 
   "(" { return OP_LROUND; }
   ")" { return OP_RROUND; }
@@ -120,7 +121,7 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
   "=" { return OP_EQ; }
   "!=" { return OP_NE; }
   "<" { return OP_LT; }
-  ">" { return OP_RT; }
+  ">" { return OP_GT; }
   "<=" { return OP_LE; }
   ">=" { return OP_GE; }
   "+" { return OP_PLUS; }

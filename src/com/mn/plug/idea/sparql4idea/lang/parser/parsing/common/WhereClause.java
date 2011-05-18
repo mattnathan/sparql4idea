@@ -16,7 +16,9 @@ public class WhereClause {
     final PsiBuilder.Marker whereClause = builder.mark();
     // (WHERE)?
     ParserUtils.getToken(builder, SparqlTokenTypes.KW_WHERE);
-    GroupGraphPattern.parse(builder);
+    if (!GroupGraphPattern.parse(builder)) {
+      builder.error("Expecting GroupGraphPattern");
+    }
 
     whereClause.done(SparqlElementTypes.WHERE_CLAUSE);
     return true;

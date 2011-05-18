@@ -81,4 +81,18 @@ public class ParserUtils {
     rb.rollbackTo();
     return i == elems.length;
   }
+
+  /**
+   * Wraps current token to node with specified element type.test
+   *
+   * @param builder Given builder
+   * @param elem    Node element
+   * @return elem type.test
+   */
+  public static IElementType eatElement(PsiBuilder builder, IElementType elem) {
+    PsiBuilder.Marker marker = builder.mark();
+    builder.advanceLexer();
+    marker.done(elem);
+    return elem;
+  }
 }

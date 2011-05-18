@@ -44,6 +44,7 @@ public interface SparqlTokenTypes {
   IElementType KW_SAME_TERM = new SparqlElementType("KW_SAME_TERM");
   IElementType KW_IS_URI = new SparqlElementType("KW_IS_URI");
   IElementType KW_IS_IRI = new SparqlElementType("KW_IS_IRI");
+  IElementType KW_IS_BLANK = new SparqlElementType("KW_IS_BLANK");
   IElementType KW_IS_LITERAL = new SparqlElementType("KW_IS_LITERAL");
   IElementType KW_REGEX = new SparqlElementType("KW_REGEX");
 
@@ -53,6 +54,12 @@ public interface SparqlTokenTypes {
   IElementType LIT_INTEGER = new SparqlElementType("INTEGER");
   IElementType LIT_DECIMAL = new SparqlElementType("DECIMAL");
   IElementType LIT_DOUBLE = new SparqlElementType("DOUBLE");
+  IElementType LIT_INTEGER_POS = new SparqlElementType("+INTEGER");
+  IElementType LIT_DECIMAL_POS = new SparqlElementType("+DECIMAL");
+  IElementType LIT_DOUBLE_POS = new SparqlElementType("+DOUBLE");
+  IElementType LIT_INTEGER_NEG = new SparqlElementType("-INTEGER");
+  IElementType LIT_DECIMAL_NEG = new SparqlElementType("-DECIMAL");
+  IElementType LIT_DOUBLE_NEG = new SparqlElementType("-DOUBLE");
   IElementType LIT_IRI = new SparqlElementType("IRI");
   IElementType LIT_PNAME_LN = new SparqlElementType("PNAME_NS");
   IElementType LIT_PNAME_NS = new SparqlElementType("PNAME_LN");
@@ -76,7 +83,7 @@ public interface SparqlTokenTypes {
   IElementType OP_EQ = new SparqlElementType("=");
   IElementType OP_NE = new SparqlElementType("!=");
   IElementType OP_LT = new SparqlElementType("<");
-  IElementType OP_RT = new SparqlElementType(">");
+  IElementType OP_GT = new SparqlElementType(">");
   IElementType OP_LE = new SparqlElementType("<=");
   IElementType OP_GE = new SparqlElementType(">=");
   IElementType OP_PLUS = new SparqlElementType("+");

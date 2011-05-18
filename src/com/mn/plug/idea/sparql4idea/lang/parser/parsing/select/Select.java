@@ -6,6 +6,7 @@ import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
 import com.mn.plug.idea.sparql4idea.lang.parser.SparqlElementTypes;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.common.DatasetClause;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.common.WhereClause;
+import com.mn.plug.idea.sparql4idea.lang.parser.parsing.lit.Literals;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
 
 import static com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes.*;
@@ -45,9 +46,9 @@ public class Select {
 
     if (ParserUtils.lookAhead(builder, OP_MULT)) {
       builder.advanceLexer();
-    } else if (ParserUtils.lookAhead(builder, VAR)) {
+    } else if (Literals.parseVar(builder)) {
       //noinspection StatementWithEmptyBody
-      while (ParserUtils.getToken(builder, VAR));
+      while (Literals.parseVar(builder));
     } else {
       builder.error("Expecting Variable or *");
     }
