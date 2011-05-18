@@ -88,7 +88,7 @@ public class Expressions {
   }
 
   private static void parsePrimaryExpr(PsiBuilder builder) {
-    if (!Functions.parseBracketedExpr(builder) &&
+    if (!parseBracketedExpr(builder) &&
             !Functions.parseBuiltInCall(builder) &&
             !Functions.parseIriRefOrFunction(builder) &&
             !Literals.parseRdfLiteral(builder) &&
@@ -97,5 +97,14 @@ public class Expressions {
             !Literals.parseVar(builder)) {
       builder.error("Expecting one of BracketedExpression, BuiltInCall, IRIrefOrFunction, RDFLiteral, NumericLiteral, BooleanLiteral or Var");
     }
+  }
+
+  public static boolean parseBracketedExpr(PsiBuilder builder) {
+    if (ParserUtils.getToken(builder, SparqlTokenTypes.OP_LROUND)) {
+      parseExpression(builder);
+      ParserUtils.getToken(builder, SparqlTokenTypes.OP_RROUND, "Expecting ')'");
+      return true;
+    }
+    return false;
   }
 }

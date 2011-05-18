@@ -21,6 +21,16 @@ public class Functions {
     return false;
   }
 
+  public static boolean parseFunction(PsiBuilder builder) {
+    if (Literals.parseIriRef(builder)) {
+      if (!parseArgList(builder)) {
+        builder.error("Expecting ArgList");
+      }
+      return true;
+    }
+    return false;
+  }
+
   private static boolean parseArgList(PsiBuilder builder) {
     if (ParserUtils.getToken(builder, SparqlTokenTypes.LIT_NIL)) {
       return true;
@@ -44,7 +54,7 @@ public class Functions {
             ParserUtils.getToken(builder, SparqlTokenTypes.KW_IS_URI) ||
             ParserUtils.getToken(builder, SparqlTokenTypes.KW_IS_BLANK) ||
             ParserUtils.getToken(builder, SparqlTokenTypes.KW_IS_LITERAL)) {
-      if (!parseBracketedExpr(builder)) {
+      if (!Expressions.parseBracketedExpr(builder)) {
         builder.error("Expecting '('");
       }
       return true;
@@ -75,15 +85,6 @@ public class Functions {
         }
         ParserUtils.getToken(builder, SparqlTokenTypes.OP_RROUND, "Expecting ')'");
       }
-      return true;
-    }
-    return false;
-  }
-
-  public static boolean parseBracketedExpr(PsiBuilder builder) {
-    if (ParserUtils.getToken(builder, SparqlTokenTypes.OP_LROUND)) {
-      Expressions.parseExpression(builder);
-      ParserUtils.getToken(builder, SparqlTokenTypes.OP_RROUND, "Expecting ')'");
       return true;
     }
     return false;

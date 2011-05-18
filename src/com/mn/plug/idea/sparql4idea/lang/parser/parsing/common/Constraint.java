@@ -1,6 +1,8 @@
 package com.mn.plug.idea.sparql4idea.lang.parser.parsing.common;
 
 import com.intellij.lang.PsiBuilder;
+import com.mn.plug.idea.sparql4idea.lang.parser.parsing.expr.Expressions;
+import com.mn.plug.idea.sparql4idea.lang.parser.parsing.func.Functions;
 
 /**
  * Constraint parser
@@ -9,7 +11,8 @@ import com.intellij.lang.PsiBuilder;
  */
 public class Constraint {
   public static boolean parse(PsiBuilder builder) {
-    // todo: implement this method
-    return false;
+    return Expressions.parseBracketedExpr(builder) ||
+            Functions.parseBuiltInCall(builder) ||
+            Functions.parseFunction(builder);
   }
 }
