@@ -16,13 +16,6 @@
 
   <actions>
     <!-- Add your actions here -->
-    <group id="sparql.ActionGroup" popup="false" text="SPARQL" icon="/icons/fileicon-16x16.png">
-      <action id="sparql.NewFile" class="com.mn.plug.idea.sparql4idea.actions.CreateSparqlFileAction"
-              text="SPARQL Query File" description="Create a new file for a SPARQL query">
-        <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFile" />
-      </action>
-    </group>
-
   </actions>
 
   <extensions defaultExtensionNs="com.intellij">
@@ -32,5 +25,7 @@
     <lang.parserDefinition language="SPARQL"
                            implementationClass="com.mn.plug.idea.sparql4idea.lang.parser.SparqlParserDefinition" />
     <lang.commenter language="SPARQL" implementationClass="com.mn.plug.idea.sparql4idea.highlight.SparqlCommenter" />
+
+    <fileTemplateGroup implementation="com.mn.plug.idea.sparql4idea.actions.SparqlFileTemplatesFactory" />
   </extensions>
 </idea-plugin>
