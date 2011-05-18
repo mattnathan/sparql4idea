@@ -1,9 +1,11 @@
 package com.mn.plug.idea.sparql4idea.lang.parser.parsing.select;
 
 import com.intellij.lang.PsiBuilder;
+import com.intellij.util.continuation.Where;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
 import com.mn.plug.idea.sparql4idea.lang.parser.SparqlElementTypes;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.common.DatasetClause;
+import com.mn.plug.idea.sparql4idea.lang.parser.parsing.common.WhereClause;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
 
 import static com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes.*;
@@ -30,6 +32,10 @@ public class Select {
       while (ParserUtils.lookAhead(builder, KW_FROM)) {
         DatasetClause.parse(builder);
       }
+
+      WhereClause.parse(builder);
+
+      // todo: SolutionModifier
     }
     selectQuery.done(SparqlElementTypes.SELECT_QUERY);
   }
@@ -40,6 +46,7 @@ public class Select {
     if (ParserUtils.lookAhead(builder, OP_MULT)) {
       builder.advanceLexer();
     } else if (ParserUtils.lookAhead(builder, VAR)) {
+      //noinspection StatementWithEmptyBody
       while (ParserUtils.getToken(builder, VAR));
     } else {
       builder.error("Expecting Variable or *");
