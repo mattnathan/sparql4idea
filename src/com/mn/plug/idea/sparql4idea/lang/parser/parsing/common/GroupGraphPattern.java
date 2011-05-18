@@ -21,10 +21,25 @@ public class GroupGraphPattern {
 
   private static boolean parseTriplesBlock(PsiBuilder builder) {
     // TriplesSameSubject
+    if (parseVarOrTerm(builder)) {
+      // PropertyListNotEmpty
+    } else if (parseTriplesNode(builder)) {
+      // PropertyList
+    } else {
+      return false;
+    }
 
     if (ParserUtils.getToken(builder, SparqlTokenTypes.OP_DOT)) {
       // TriplesBlock
     }
     return true;
+  }
+
+  private static boolean parseVarOrTerm(PsiBuilder builder) {
+    return false;
+  }
+
+  private static boolean parseTriplesNode(PsiBuilder builder) {
+    return false;
   }
 }
