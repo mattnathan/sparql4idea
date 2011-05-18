@@ -12,7 +12,8 @@ import com.mn.plug.idea.sparql4idea.SparqlIcons;
 public class SparqlFileTemplatesFactory implements FileTemplateGroupDescriptorFactory {
 
   public static enum Templates {
-    SELECT("SPARQL Select");
+    SELECT("SPARQL Select"),
+    ASK("SPARQL Ask");
     private final String file;
 
     Templates(String file) {
