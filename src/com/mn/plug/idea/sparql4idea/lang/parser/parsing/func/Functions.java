@@ -1,4 +1,4 @@
-package com.mn.plug.idea.sparql4idea.lang.func;
+package com.mn.plug.idea.sparql4idea.lang.parser.parsing.func;
 
 import com.intellij.lang.PsiBuilder;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
