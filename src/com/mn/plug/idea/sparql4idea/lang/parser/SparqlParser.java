@@ -5,6 +5,7 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
+import com.mn.plug.idea.sparql4idea.lang.parser.parsing.toplevel.Prologue;
 import org.jetbrains.annotations.NotNull;
 
 import static com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes.*;
@@ -33,7 +34,7 @@ public class SparqlParser implements PsiParser {
   }
 
   private void parseQuery(PsiBuilder builder) {
-    parsePrologue(builder);
+    Prologue.parse(builder);
 
     if (builder.getTokenType() == KW_SELECT) {
       parseSelectQuery(builder);
@@ -146,38 +147,5 @@ public class SparqlParser implements PsiParser {
     }
 
     datasetClause.done(DATASET_CLAUSE);
-  }
-
-  private void parsePrologue(PsiBuilder builder) {
-    if (builder.getTokenType() == SparqlTokenTypes.KW_BASE) {
-      final PsiBuilder.Marker baseDecl = builder.mark();
-      builder.advanceLexer();
-      parseIriRef(builder);
-      baseDecl.done(BASE_DECL);
-    }
-
-    while (builder.getTokenType() == SparqlTokenTypes.KW_PREFIX) {
-      final PsiBuilder.Marker prefixDecl = builder.mark();
-      builder.advanceLexer();
-      parsePnameNs(builder);
-      parseIriRef(builder);
-      prefixDecl.done(PREFIX_DECL);
-    }
-  }
-
-  private void parseIriRef(PsiBuilder builder) {
-    if (builder.getTokenType() == LIT_IRI) {
-      builder.advanceLexer();
-    } else {
-      builder.error("Expecting IRI_REF");
-    }
-  }
-
-  private void parsePnameNs(PsiBuilder builder) {
-    if (builder.getTokenType() == LIT_PNAME_NS) {
-      builder.advanceLexer();
-    } else {
-      builder.error("Expecting PNAME_NS");
-    }
   }
 }
