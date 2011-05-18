@@ -1,16 +1,15 @@
 package com.mn.plug.idea.sparql4idea.lang.parser.parsing.select;
 
 import com.intellij.lang.PsiBuilder;
-import com.intellij.util.continuation.Where;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
 import com.mn.plug.idea.sparql4idea.lang.parser.SparqlElementTypes;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.common.DatasetClause;
+import com.mn.plug.idea.sparql4idea.lang.parser.parsing.common.SolutionModifiers;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.common.WhereClause;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.lit.Literals;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
 
 import static com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes.*;
-import static com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes.VAR;
 
 /**
  * Select query parser.
@@ -36,7 +35,7 @@ public class Select {
 
       WhereClause.parse(builder);
 
-      // todo: SolutionModifier
+      SolutionModifiers.parseOrderClause(builder);
     }
     selectQuery.done(SparqlElementTypes.SELECT_QUERY);
   }

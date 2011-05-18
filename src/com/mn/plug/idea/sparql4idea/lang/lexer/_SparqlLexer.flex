@@ -69,6 +69,8 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
   [aA][sS][kK] { return KW_ASK; }
   [oO][rR][dD][eE][rR] { return KW_ORDER; }
   [bB][yY] { return KW_BY; }
+  [aA][sS][kK] { return KW_ASK; }
+  [dD][eE][sS][cC] { return KW_DESC; }
   [lL][iI][mM][iI][tT] { return KW_LIMIT; }
   [oO][fF][fF][sS][eE][tT] { return KW_OFFSET; }
   [dD][iI][sS][tT][iI][nN][cC][tT] { return KW_DISTINCT; }
