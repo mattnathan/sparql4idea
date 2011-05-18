@@ -2,6 +2,7 @@ package com.mn.plug.idea.sparql4idea.lang.parser.parsing.common;
 
 import com.intellij.lang.PsiBuilder;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
+import com.mn.plug.idea.sparql4idea.lang.parser.parsing.lit.Literals;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
 
 /**
@@ -36,7 +37,22 @@ public class GroupGraphPattern {
   }
 
   private static boolean parseVarOrTerm(PsiBuilder builder) {
+    if (ParserUtils.lookAhead(builder, SparqlTokenTypes.VAR)) {
+      builder.advanceLexer();
+      return true;
+    } else if (parseGraphTerm(builder)) {
+      return true;
+    }
     return false;
+  }
+
+  private static boolean parseGraphTerm(PsiBuilder builder) {
+    return Literals.parseIriRef(builder) ||
+            Literals.parseRdfLiteral(builder) ||
+            Literals.parseNumericLiteral(builder) ||
+            Literals.parseBooleanLiteral(builder) ||
+            Literals.parseBlankNode(builder) ||
+            Literals.parseNil(builder);
   }
 
   private static boolean parseTriplesNode(PsiBuilder builder) {
