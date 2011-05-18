@@ -25,6 +25,8 @@ public interface SparqlTokenTypeSets {
           KW_ASK,
           KW_ORDER,
           KW_BY,
+          KW_ASC,
+          KW_DESC,
           KW_LIMIT,
           KW_OFFSET,
           KW_DISTINCT,

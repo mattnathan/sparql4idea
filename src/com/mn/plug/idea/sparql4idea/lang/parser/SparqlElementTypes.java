@@ -30,4 +30,5 @@ public interface SparqlElementTypes {
   IElementType ADDITIVE_EXPR = new SparqlElementType("ADDITIVE_EXPR");
   IElementType MULTIPLICATIVE_EXPR = new SparqlElementType("MULTIPLICATIVE_EXPR");
   IElementType UNARY_EXPR = new SparqlElementType("UNARY_EXPR");
+  IElementType SOLUTION_MODIFIERS = new SparqlElementType("SOLUTION_MODIFIERS");
 }

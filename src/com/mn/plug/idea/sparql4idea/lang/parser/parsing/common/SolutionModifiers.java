@@ -2,6 +2,7 @@ package com.mn.plug.idea.sparql4idea.lang.parser.parsing.common;
 
 import com.intellij.lang.PsiBuilder;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
+import com.mn.plug.idea.sparql4idea.lang.parser.SparqlElementTypes;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.expr.Expressions;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.lit.Literals;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
@@ -14,8 +15,10 @@ import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
 public class SolutionModifiers {
 
   public static void parse(PsiBuilder builder) {
+    final PsiBuilder.Marker modifiers = builder.mark();
     parseOrderClause(builder);
     parseLimitOffsetClauses(builder);
+    modifiers.done(SparqlElementTypes.SOLUTION_MODIFIERS);
   }
 
   public static boolean parseLimitOffsetClauses(PsiBuilder builder) {
