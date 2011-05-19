@@ -12,15 +12,18 @@ import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
  * @author Matt Nathan
  */
 public class BaseDecl {
+
   public static boolean parse(PsiBuilder builder) {
-    final PsiBuilder.Marker baseDecl = builder.mark();
+    if (ParserUtils.lookAhead(builder, SparqlTokenTypes.KW_BASE)) {
+      final PsiBuilder.Marker baseDecl = builder.mark();
 
-    if (ParserUtils.getToken(builder, SparqlTokenTypes.KW_BASE, "Expecing \"BASE\"")) {
-      IriRef.parse(builder);
+      if (ParserUtils.getToken(builder, SparqlTokenTypes.KW_BASE, "Expecing \"BASE\"")) {
+        IriRef.parse(builder);
+      }
+
+      baseDecl.done(SparqlElementTypes.BASE_DECL);
+      return true;
     }
-
-    baseDecl.done(SparqlElementTypes.BASE_DECL);
-
-    return true;
+    return false;
   }
 }
