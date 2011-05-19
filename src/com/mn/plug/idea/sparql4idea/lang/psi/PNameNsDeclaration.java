@@ -95,13 +95,13 @@ public class PNameNsDeclaration extends ASTWrapperPsiElement implements PsiNamed
 
     @Override
     public boolean isReferenceTo(PsiElement element) {
-      return element == reference;
+      return element == reference.getNs();
     }
 
     @NotNull
     @Override
     public Object[] getVariants() {
-      return new Object[] {reference};
+      return new Object[] {reference.getNs()};
     }
 
     @Override
