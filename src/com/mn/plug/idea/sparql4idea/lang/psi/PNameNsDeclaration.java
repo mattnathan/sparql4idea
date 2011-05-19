@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * PNameNs declaration (i.e. 'my:' )
+ * PNameNs declaration (i.e. 'my':local )
  *
  * @author Matt Nathan
  */
@@ -24,7 +24,7 @@ public class PNameNsDeclaration extends ASTWrapperPsiElement implements PsiNamed
 
   @Override
   public String getName() {
-    return getText().substring(0, getText().length() - 1);
+    return getText();
   }
 
   @Override
@@ -34,7 +34,7 @@ public class PNameNsDeclaration extends ASTWrapperPsiElement implements PsiNamed
 
   @Override
   public String toString() {
-    return "PNameNs(" + getName() + ")";
+    return "PNAME NS(" + getName() + ")";
   }
 
   @Override
@@ -64,8 +64,7 @@ public class PNameNsDeclaration extends ASTWrapperPsiElement implements PsiNamed
 
     @Override
     public TextRange getRangeInElement() {
-      final String text = getElement().getText();
-      return new TextRange(0, text.length() - 1);
+      return new TextRange(0, getElement().getTextLength());
     }
 
     @Override

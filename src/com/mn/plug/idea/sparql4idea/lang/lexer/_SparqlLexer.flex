@@ -58,6 +58,10 @@ PN_CHARS = {PN_CHARS_U} | [\-0-9\u00B7\u0300-\u036F\u203F-\u2040]
 PN_PREFIX = {PN_CHARS_BASE} (({PN_CHARS}|".")* {PN_CHARS})?
 PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
 
+%x PNAME_NS
+%x PNAME_LN
+%x PNAME_LN2
+
 %%
 
 <YYINITIAL> {
@@ -134,8 +138,8 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
   "^^" { return OP_HATHAT; }
 
   {IRI_REF} { return LIT_IRI; }
-  {PNAME_LN} { return LIT_PNAME_LN; }
-  {PNAME_NS} { return LIT_PNAME_NS; }
+  {PNAME_LN} { yypushback(yylength()); yybegin(PNAME_LN); }
+  {PNAME_NS} { yypushback(yylength()); yybegin(PNAME_NS); }
   {BLANK_NODE_LABEL} { return LIT_BLANK_NODE; }
   {ANON} { return LIT_ANON; }
   {NIL} { return LIT_NIL; }
@@ -145,6 +149,22 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
   {STRING_LITERAL1}|{STRING_LITERAL2}|{STRING_LITERAL_LONG1}|{STRING_LITERAL_LONG2} { return LIT_STRING; }
 
   "#".* { return COMMENT; }
+}
+
+// here we process PNAME_NS as separate tokens instead of one. We can assume that it looks exactly as it should
+<PNAME_NS> {
+	":" { yybegin(YYINITIAL); return NAME_COLON; }
+	{PN_PREFIX}/":" { return NAME_NS; }
+	[^] { yybegin(YYINITIAL); return BAD_CHARACTER; }
+}
+<PNAME_LN> {
+	":" { yybegin(PNAME_LN2); return NAME_COLON; }
+	{PN_PREFIX}/":" { return NAME_NS; }
+	[^] { yybegin(YYINITIAL); return BAD_CHARACTER; }
+}
+<PNAME_LN2> {
+	{PN_LOCAL} { yybegin(YYINITIAL); return NAME_LN; }
+	[^] { yybegin(YYINITIAL); return BAD_CHARACTER; }
 }
 
 {WS} { return WHITE_SPACE; }

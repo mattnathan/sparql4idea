@@ -32,7 +32,7 @@ public class Literals {
   }
 
   public static boolean parsePrefixedName(PsiBuilder builder) {
-    if (ParserUtils.getToken(builder, SparqlTokenTypes.LIT_PNAME_LN)) {
+    if (parsePNameLn(builder)) {
       return true;
     } else if (parsePNameNs(builder)) {
       return true;
@@ -40,9 +40,42 @@ public class Literals {
     return false;
   }
 
+  public static boolean parsePNameLn(PsiBuilder builder) {
+    if (ParserUtils.lookAhead(builder, SparqlTokenTypes.NAME_NS)) {
+      final PsiBuilder.Marker pname = builder.mark();
+      ParserUtils.eatElement(builder, SparqlTokenTypes.NAME_NS);
+      ParserUtils.getToken(builder, SparqlTokenTypes.NAME_COLON, "Expecting ':'");
+      if (!ParserUtils.lookAhead(builder, SparqlTokenTypes.NAME_LN)) {
+        builder.error("Expecting local name part");
+      } else {
+        ParserUtils.eatElement(builder, SparqlTokenTypes.NAME_LN);
+      }
+      pname.done(SparqlElementTypes.PNAME);
+      return true;
+
+    } else if (ParserUtils.lookAhead(builder, SparqlTokenTypes.NAME_COLON)) {
+      final PsiBuilder.Marker pname = builder.mark();
+      ParserUtils.getToken(builder, SparqlTokenTypes.NAME_COLON);
+      if (!ParserUtils.lookAhead(builder, SparqlTokenTypes.NAME_LN)) {
+        builder.error("Expecting local name part");
+      } else {
+        ParserUtils.eatElement(builder, SparqlTokenTypes.NAME_LN);
+      }
+      pname.done(SparqlElementTypes.PNAME);
+      return true;
+    }
+    return false;
+  }
+
   public static boolean parsePNameNs(PsiBuilder builder) {
-    if (ParserUtils.lookAhead(builder, SparqlTokenTypes.LIT_PNAME_NS)) {
-      ParserUtils.eatElement(builder, SparqlTokenTypes.LIT_PNAME_NS);
+    if (ParserUtils.lookAhead(builder, SparqlTokenTypes.NAME_NS)) {
+      final PsiBuilder.Marker pname = builder.mark();
+      ParserUtils.eatElement(builder, SparqlTokenTypes.NAME_NS);
+      ParserUtils.getToken(builder, SparqlTokenTypes.NAME_COLON, "Expecting ':'");
+      pname.done(SparqlElementTypes.PNAME);
+      return true;
+    } else if (ParserUtils.lookAhead(builder, SparqlTokenTypes.NAME_COLON)) {
+      ParserUtils.eatElement(builder, SparqlElementTypes.PNAME);
       return true;
     }
     return false;

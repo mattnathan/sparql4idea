@@ -39,4 +39,6 @@ public interface SparqlElementTypes {
   IElementType UNION_GRAPH = new SparqlElementType("UNION_GRAPH");
   IElementType FILTER = new SparqlElementType("FILTER");
   IElementType CONSTRUCT_TEMPLATE = new SparqlElementType("CONSTRUCT_TEMPLATE");
+
+  IElementType PNAME = new SparqlElementType("PNAME");
 }

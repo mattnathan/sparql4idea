@@ -71,6 +71,10 @@ public interface SparqlTokenTypes {
   IElementType VAR = new SparqlElementType("VAR");
   IElementType LANGTAG = new SparqlElementType("LANGTAG");
 
+  IElementType NAME_NS = new SparqlElementType("NAME_NS");
+  IElementType NAME_COLON = new SparqlElementType("NAME_COLON");
+  IElementType NAME_LN = new SparqlElementType("NAME_LN");
+
   IElementType OP_LROUND = new SparqlElementType("(");
   IElementType OP_RROUND = new SparqlElementType(")");
   IElementType OP_LSQUARE = new SparqlElementType("[");

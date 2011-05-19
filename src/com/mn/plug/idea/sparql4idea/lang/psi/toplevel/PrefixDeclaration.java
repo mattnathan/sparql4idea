@@ -3,6 +3,7 @@ package com.mn.plug.idea.sparql4idea.lang.psi.toplevel;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.mn.plug.idea.sparql4idea.lang.psi.IriPsiElement;
+import com.mn.plug.idea.sparql4idea.lang.psi.PNameExpression;
 import com.mn.plug.idea.sparql4idea.lang.psi.PNameNsDeclaration;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,7 +24,8 @@ public class PrefixDeclaration extends ASTWrapperPsiElement {
   }
 
   public PNameNsDeclaration getNs() {
-    return findChildByClass(PNameNsDeclaration.class);
+    final PNameExpression pname = findChildByClass(PNameExpression.class);
+    return pname == null ? null : pname.getNamespace();
   }
 
   public String getIriValue() {
