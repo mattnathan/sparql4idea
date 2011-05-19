@@ -33,4 +33,5 @@ public interface SparqlElementTypes {
   IElementType COLLECTION = new SparqlElementType("COLLECTION");
   IElementType OBJECT_LIST = new SparqlElementType("OBJECT_LIST");
   IElementType TRIPLE_PROPERTY = new SparqlElementType("TRIPLE_PROPERTY");
+  IElementType TRIPLES_BLOCK = new SparqlElementType("TRIPLES_BLOCK");
 }

@@ -2,6 +2,7 @@ package com.mn.plug.idea.sparql4idea.lang.parser.parsing.common;
 
 import com.intellij.lang.PsiBuilder;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
+import com.mn.plug.idea.sparql4idea.lang.parser.SparqlElementTypes;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.lit.Literals;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
 
@@ -33,20 +34,33 @@ public class Triples {
   }
 
   public static boolean parseTriplesBlock(PsiBuilder builder) {
-    // TriplesSameSubject
+    if (!parseTriplesSameSubject(builder)) {
+      return false;
+    }
+
+    while (ParserUtils.getToken(builder, SparqlTokenTypes.OP_DOT)) {
+      if (!parseTriplesSameSubject(builder)) {
+        break;
+      }
+    }
+    return true;
+  }
+
+  private static boolean parseTriplesSameSubject(PsiBuilder builder) {
+    final PsiBuilder.Marker triplesBlock = builder.mark();
     if (Literals.parseVarOrTerm(builder)) {
       if (!PropertyList.parse(builder)) {
         builder.error("Expecting PropertyListNotEmpty");
       }
+      triplesBlock.done(SparqlElementTypes.TRIPLES_BLOCK);
+      return true;
     } else if (parseTriplesNode(builder)) {
       PropertyList.parse(builder);
+      triplesBlock.done(SparqlElementTypes.TRIPLES_BLOCK);
+      return true;
     } else {
+      triplesBlock.drop();
       return false;
     }
-
-    if (ParserUtils.getToken(builder, SparqlTokenTypes.OP_DOT)) {
-      parseTriplesBlock(builder);
-    }
-    return true;
   }
 }
