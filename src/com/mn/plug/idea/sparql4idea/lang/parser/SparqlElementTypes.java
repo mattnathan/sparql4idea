@@ -34,4 +34,7 @@ public interface SparqlElementTypes {
   IElementType OBJECT_LIST = new SparqlElementType("OBJECT_LIST");
   IElementType TRIPLE_PROPERTY = new SparqlElementType("TRIPLE_PROPERTY");
   IElementType TRIPLES_BLOCK = new SparqlElementType("TRIPLES_BLOCK");
+  IElementType OPTIONAL_GRAPH = new SparqlElementType("OPTIONAL_GRAPH");
+  IElementType GRAPH_GRAPH = new SparqlElementType("GRAPH_GRAPH");
+  IElementType UNION_GRAPH = new SparqlElementType("UNION_GRAPH");
 }
