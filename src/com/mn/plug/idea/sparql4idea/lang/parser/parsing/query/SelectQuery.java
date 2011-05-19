@@ -24,8 +24,8 @@ public class SelectQuery {
 
       if (ParserUtils.getToken(builder, SparqlTokenTypes.KW_SELECT, "Expecting \"SELECT\"")) {
 
-        if (builder.getTokenType() == KW_DISTINCT || builder.getTokenType() == KW_REDUCED) {
-          builder.advanceLexer();
+        if (!ParserUtils.getToken(builder, KW_DISTINCT)) {
+          ParserUtils.getToken(builder, KW_REDUCED);
         }
 
         parseProjectionVariables(builder);
@@ -47,8 +47,8 @@ public class SelectQuery {
   private static void parseProjectionVariables(PsiBuilder builder) {
     final PsiBuilder.Marker vars = builder.mark();
 
-    if (ParserUtils.lookAhead(builder, OP_MULT)) {
-      builder.advanceLexer();
+    if (ParserUtils.getToken(builder, OP_MULT)) {
+      // we have parsed all needed tokens
     } else if (Literals.parseVar(builder)) {
       //noinspection StatementWithEmptyBody
       while (Literals.parseVar(builder)) ;
