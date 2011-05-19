@@ -2,6 +2,7 @@ package com.mn.plug.idea.sparql4idea.lang.parser.parsing.toplevel;
 
 import com.intellij.lang.PsiBuilder;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.query.ConstructQuery;
+import com.mn.plug.idea.sparql4idea.lang.parser.parsing.query.DescribeQuery;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.query.SelectQuery;
 
 /**
@@ -14,8 +15,8 @@ public class Query {
     Prologue.parse(builder);
 
     if (!SelectQuery.parse(builder) &&
-            !ConstructQuery.parse(builder)) {
-      // todo: DescribeQuery
+            !ConstructQuery.parse(builder) &&
+            !DescribeQuery.parse(builder)) {
       // todo: AskQuery
       builder.error("Expecting one of SELECT, CONSTRUCT, DESCRIBE or ASK");
     }
