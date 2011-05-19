@@ -4,7 +4,6 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.util.IncorrectOperationException;
@@ -17,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Matt Nathan
  */
-public class PNameNsDeclaration extends ASTWrapperPsiElement implements PsiNamedElement, PsiReference {
+public class PNameNsDeclaration extends ASTWrapperPsiElement implements PsiNamedElement {
 
   public PNameNsDeclaration(@NotNull ASTNode node) {
     super(node);
@@ -40,76 +39,73 @@ public class PNameNsDeclaration extends ASTWrapperPsiElement implements PsiNamed
 
   @Override
   public PsiReference getReference() {
-    System.out.println("PNameNsDeclaration.getReference");
     final SparqlFileImpl containingFile = (SparqlFileImpl) getContainingFile();
     final PrefixDeclaration[] prefixDeclarations = containingFile.getPrefixDeclarations();
     for (PrefixDeclaration prefixDeclaration : prefixDeclarations) {
       if (prefixDeclaration.getNs() != this && prefixDeclaration.getNsLabel().equals(getName())) {
-        return this;
+        return new NsReference(prefixDeclaration.getNs());
       }
     }
     return super.getReference();
   }
 
-  @Override
-  public PsiElement getElement() {
-    return this;
-  }
+  private class NsReference implements PsiReference {
 
-  @Override
-  public TextRange getRangeInElement() {
-    return new TextRange(0, getText().length() - 1);
-  }
+    private final PNameNsDeclaration reference;
 
-  @Override
-  public PsiElement resolve() {
-    System.out.println("PNameNsDeclaration.resolve");
-    final SparqlFileImpl containingFile = (SparqlFileImpl) getContainingFile();
-    final PrefixDeclaration[] prefixDeclarations = containingFile.getPrefixDeclarations();
-    for (PrefixDeclaration prefixDeclaration : prefixDeclarations) {
-      if (prefixDeclaration.getNs() != this && prefixDeclaration.getNsLabel().equals(getName())) {
-        return prefixDeclaration.getNs();
-      }
+    public NsReference(PNameNsDeclaration reference) {
+      this.reference = reference;
     }
-    return null;
-  }
 
-  @NotNull
-  @Override
-  public String getCanonicalText() {
-    final String name = getName();
-    return name == null ? "" : name;
-  }
-
-  @Override
-  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
-    /* @todo Auto-generated method body */
-    return null;
-  }
-
-  @Override
-  public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
-    /* @todo Auto-generated method body */
-    return null;
-  }
-
-  @Override
-  public boolean isReferenceTo(PsiElement element) {
-    if (element instanceof PNameNsDeclaration) {
-      final String name = ((PNameNsDeclaration) element).getName();
-      return name == null ? getName() == null : name.equals(getName());
+    @Override
+    public PsiElement getElement() {
+      return PNameNsDeclaration.this;
     }
-    return false;
-  }
 
-  @NotNull
-  @Override
-  public Object[] getVariants() {
-    return new Object[] {getName()};
-  }
+    @Override
+    public TextRange getRangeInElement() {
+      final String text = getElement().getText();
+      return new TextRange(0, text.length() - 1);
+    }
 
-  @Override
-  public boolean isSoft() {
-    return false;
+    @Override
+    public PsiElement resolve() {
+      return reference;
+    }
+
+    @NotNull
+    @Override
+    public String getCanonicalText() {
+      final String name = reference.getName();
+      return name == null ? "" : name;
+    }
+
+    @Override
+    public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+      /* @todo Auto-generated method body */
+      return null;
+    }
+
+    @Override
+    public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
+      /* @todo Auto-generated method body */
+      return null;
+    }
+
+    @Override
+    public boolean isReferenceTo(PsiElement element) {
+      return element == reference;
+    }
+
+    @NotNull
+    @Override
+    public Object[] getVariants() {
+      return new Object[] {reference};
+    }
+
+    @Override
+    public boolean isSoft() {
+      return false;
+    }
   }
 }
