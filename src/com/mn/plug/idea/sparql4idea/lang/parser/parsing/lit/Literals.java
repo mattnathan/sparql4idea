@@ -36,7 +36,7 @@ public class Literals {
     if (ParserUtils.getToken(builder, SparqlTokenTypes.LIT_STRING)) {
       if (ParserUtils.getToken(builder, SparqlTokenTypes.OP_HATHAT)) {
         if (!parseIriRef(builder)) {
-          builder.error("Expecting IRI Reference");
+          builder.error("Expecting IRIref");
         }
       } else {
         ParserUtils.getToken(builder, SparqlTokenTypes.LANGTAG);
