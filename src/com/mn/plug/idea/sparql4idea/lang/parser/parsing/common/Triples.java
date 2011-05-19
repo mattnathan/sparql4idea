@@ -29,7 +29,7 @@ public class Triples {
     // TriplesSameSubject
     if (Literals.parseVarOrTerm(builder)) {
       if (!PropertyList.parse(builder)) {
-        builder.error("Expecting property list");
+        builder.error("Expecting PropertyListNotEmpty");
       }
     } else if (parseTriplesNode(builder)) {
       PropertyList.parse(builder);

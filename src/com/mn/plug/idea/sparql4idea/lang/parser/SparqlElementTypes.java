@@ -21,8 +21,6 @@ public interface SparqlElementTypes {
   
   IElementType DATASET_CLAUSE = new SparqlElementType("DATASET_CLAUSE");
   IElementType WHERE_CLAUSE = new SparqlElementType("WHERE_CLAUSE");
-  
-  IElementType VARIABLE = new SparqlElementType("VARIABLE");
 
   IElementType OR_EXPR = new SparqlElementType("OR_EXPR");
   IElementType AND_EXPR = new SparqlElementType("AND_EXPR");
