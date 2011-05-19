@@ -12,10 +12,12 @@ import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
  * @author Matt Nathan
  */
 public class WhereClause {
+
   public static boolean parse(PsiBuilder builder) {
     final PsiBuilder.Marker whereClause = builder.mark();
     // (WHERE)?
     ParserUtils.getToken(builder, SparqlTokenTypes.KW_WHERE);
+
     if (!GroupGraphPattern.parse(builder)) {
       builder.error("Expecting GroupGraphPattern");
     }
