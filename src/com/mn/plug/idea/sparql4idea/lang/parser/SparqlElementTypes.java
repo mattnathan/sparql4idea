@@ -31,4 +31,5 @@ public interface SparqlElementTypes {
   IElementType MULTIPLICATIVE_EXPR = new SparqlElementType("MULTIPLICATIVE_EXPR");
   IElementType UNARY_EXPR = new SparqlElementType("UNARY_EXPR");
   IElementType SOLUTION_MODIFIERS = new SparqlElementType("SOLUTION_MODIFIERS");
+  IElementType GROUP_GRAPH_PATTERN = new SparqlElementType("GROUP_GRAPH_PATTERN");
 }
