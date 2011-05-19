@@ -32,4 +32,5 @@ public interface SparqlElementTypes {
   IElementType GROUP_GRAPH_PATTERN = new SparqlElementType("GROUP_GRAPH_PATTERN");
   IElementType COLLECTION = new SparqlElementType("COLLECTION");
   IElementType OBJECT_LIST = new SparqlElementType("OBJECT_LIST");
+  IElementType TRIPLE_PROPERTY = new SparqlElementType("TRIPLE_PROPERTY");
 }

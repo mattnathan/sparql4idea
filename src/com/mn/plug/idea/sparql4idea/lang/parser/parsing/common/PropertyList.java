@@ -24,10 +24,13 @@ public class PropertyList {
   }
 
   private static boolean parseVerbObjectList(PsiBuilder builder) {
+    final PsiBuilder.Marker tripleProperty = builder.mark();
     if (Verb.parse(builder)) {
       parseObjectList(builder);
+      tripleProperty.done(SparqlElementTypes.TRIPLE_PROPERTY);
       return true;
     }
+    tripleProperty.drop();
     return false;
   }
 
