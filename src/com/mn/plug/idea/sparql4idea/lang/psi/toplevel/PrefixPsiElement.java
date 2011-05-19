@@ -4,6 +4,7 @@ import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
+import com.mn.plug.idea.sparql4idea.lang.psi.IriPsiElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -19,14 +20,16 @@ public class PrefixPsiElement extends ASTWrapperPsiElement {
 
   public String getNsLabel() {
     final PsiElement nsElem = findChildByType(SparqlTokenTypes.LIT_PNAME_NS);
-    final String text = nsElem.getText();
-    return text == null ? "" : text.substring(0, text.length() - 1);
+    if (nsElem != null) {
+      final String text = nsElem.getText();
+      return text.substring(0, text.length() - 1);
+    }
+    return "";
   }
 
   public String getIri() {
-    final PsiElement iriElem = findChildByType(SparqlTokenTypes.LIT_IRI);
-    final String text = iriElem.getText();
-    return text == null ? "" : text.substring(1, text.length() - 1);
+    final IriPsiElement iriElem = findChildByClass(IriPsiElement.class);
+    return iriElem == null ? "" : iriElem.getIri();
   }
 
   @Override

@@ -15,9 +15,17 @@ import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
 public class Literals {
 
   public static boolean parseIriRef(PsiBuilder builder) {
-    if (ParserUtils.getToken(builder, SparqlTokenTypes.LIT_IRI)) {
+    if (parseIri(builder)) {
       return true;
     } else if (parsePrefixedName(builder)) {
+      return true;
+    }
+    return false;
+  }
+
+  public static boolean parseIri(PsiBuilder builder) {
+    if (ParserUtils.lookAhead(builder, SparqlTokenTypes.LIT_IRI)) {
+      ParserUtils.eatElement(builder, SparqlTokenTypes.LIT_IRI);
       return true;
     }
     return false;
