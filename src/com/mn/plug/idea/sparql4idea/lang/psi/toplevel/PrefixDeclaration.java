@@ -17,7 +17,7 @@ public class PrefixDeclaration extends ASTWrapperPsiElement {
     super(node);
   }
 
-  public String getNsLabel() {
+  public String getNsValue() {
     final PNameNsDeclaration ns = getNs();
     return ns == null ? "" : ns.getName();
   }
@@ -37,6 +37,6 @@ public class PrefixDeclaration extends ASTWrapperPsiElement {
 
   @Override
   public String toString() {
-    return "PrefixDeclaration(" + getNsLabel() + ", " + getIriValue() + ")";
+    return "PrefixDeclaration(" + getNsValue() + ", " + getIriValue() + ")";
   }
 }

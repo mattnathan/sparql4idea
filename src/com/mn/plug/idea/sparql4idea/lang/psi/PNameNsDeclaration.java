@@ -42,8 +42,8 @@ public class PNameNsDeclaration extends ASTWrapperPsiElement implements PsiNamed
     final SparqlFileImpl containingFile = (SparqlFileImpl) getContainingFile();
     final PrefixDeclaration[] prefixDeclarations = containingFile.getPrefixDeclarations();
     for (PrefixDeclaration prefixDeclaration : prefixDeclarations) {
-      if (prefixDeclaration.getNs() != this && prefixDeclaration.getNsLabel().equals(getName())) {
-        return new NsReference(prefixDeclaration.getNs());
+      if (prefixDeclaration.getNs() != this && prefixDeclaration.getNsValue().equals(getName())) {
+        return new NsReference(prefixDeclaration);
       }
     }
     return super.getReference();
@@ -51,9 +51,9 @@ public class PNameNsDeclaration extends ASTWrapperPsiElement implements PsiNamed
 
   private class NsReference implements PsiReference {
 
-    private final PNameNsDeclaration reference;
+    private final PrefixDeclaration reference;
 
-    public NsReference(PNameNsDeclaration reference) {
+    public NsReference(PrefixDeclaration reference) {
       this.reference = reference;
     }
 
@@ -70,14 +70,15 @@ public class PNameNsDeclaration extends ASTWrapperPsiElement implements PsiNamed
 
     @Override
     public PsiElement resolve() {
-      return reference;
+      return reference.getNs();
     }
 
     @NotNull
     @Override
     public String getCanonicalText() {
-      final String name = reference.getName();
-      return name == null ? "" : name;
+      final String ns = reference.getNsValue();
+      final String iri = reference.getIriValue();
+      return ns + " : {" + iri + "}";
     }
 
     @Override
