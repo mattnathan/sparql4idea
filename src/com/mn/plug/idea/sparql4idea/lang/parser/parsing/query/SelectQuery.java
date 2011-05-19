@@ -1,4 +1,4 @@
-package com.mn.plug.idea.sparql4idea.lang.parser.parsing.select;
+package com.mn.plug.idea.sparql4idea.lang.parser.parsing.query;
 
 import com.intellij.lang.PsiBuilder;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
@@ -16,28 +16,32 @@ import static com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes.*;
  *
  * @author Matt Nathan
  */
-public class Select {
+public class SelectQuery {
 
-  public static void parse(PsiBuilder builder) {
-    final PsiBuilder.Marker selectQuery = builder.mark();
+  public static boolean parse(PsiBuilder builder) {
+    if (ParserUtils.lookAhead(builder, SparqlTokenTypes.KW_SELECT)) {
+      final PsiBuilder.Marker selectQuery = builder.mark();
 
-    if (ParserUtils.getToken(builder, SparqlTokenTypes.KW_SELECT, "Expecting \"SELECT\"")) {
+      if (ParserUtils.getToken(builder, SparqlTokenTypes.KW_SELECT, "Expecting \"SELECT\"")) {
 
-      if (builder.getTokenType() == KW_DISTINCT || builder.getTokenType() == KW_REDUCED) {
-        builder.advanceLexer();
+        if (builder.getTokenType() == KW_DISTINCT || builder.getTokenType() == KW_REDUCED) {
+          builder.advanceLexer();
+        }
+
+        parseProjectionVariables(builder);
+
+        while (ParserUtils.lookAhead(builder, KW_FROM)) {
+          DatasetClause.parse(builder);
+        }
+
+        WhereClause.parse(builder);
+
+        SolutionModifiers.parse(builder);
       }
-
-      parseProjectionVariables(builder);
-
-      while (ParserUtils.lookAhead(builder, KW_FROM)) {
-        DatasetClause.parse(builder);
-      }
-
-      WhereClause.parse(builder);
-
-      SolutionModifiers.parse(builder);
+      selectQuery.done(SparqlElementTypes.SELECT_QUERY);
+      return true;
     }
-    selectQuery.done(SparqlElementTypes.SELECT_QUERY);
+    return false;
   }
 
   private static void parseProjectionVariables(PsiBuilder builder) {
@@ -47,7 +51,7 @@ public class Select {
       builder.advanceLexer();
     } else if (Literals.parseVar(builder)) {
       //noinspection StatementWithEmptyBody
-      while (Literals.parseVar(builder));
+      while (Literals.parseVar(builder)) ;
     } else {
       builder.error("Expecting Variable or *");
     }
