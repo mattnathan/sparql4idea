@@ -49,6 +49,8 @@ public interface SparqlTokenTypeSets {
           KW_IS_IRI,
           KW_IS_BLANK,
           KW_IS_LITERAL,
-          KW_REGEX
+          KW_REGEX,
+          LIT_TRUE,
+          LIT_FALSE
   );
 }
