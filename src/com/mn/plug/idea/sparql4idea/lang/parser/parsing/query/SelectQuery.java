@@ -30,9 +30,8 @@ public class SelectQuery {
 
         parseProjectionVariables(builder);
 
-        while (ParserUtils.lookAhead(builder, KW_FROM)) {
-          DatasetClause.parse(builder);
-        }
+        //noinspection StatementWithEmptyBody
+        while (DatasetClause.parse(builder)) ;
 
         WhereClause.parse(builder);
 
