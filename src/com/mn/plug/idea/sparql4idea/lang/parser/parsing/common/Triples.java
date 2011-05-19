@@ -15,7 +15,14 @@ public class Triples {
   public static boolean parseTriplesNode(PsiBuilder builder) {
     if (Literals.parseCollection(builder)) {
       return true;
-    } else if (ParserUtils.getToken(builder, SparqlTokenTypes.OP_LSQUARE)) {
+    } else if (parseBlankNodePropertyList(builder)) {
+      return true;
+    }
+    return false;
+  }
+
+  public static boolean parseBlankNodePropertyList(PsiBuilder builder) {
+    if (ParserUtils.getToken(builder, SparqlTokenTypes.OP_LSQUARE)) {
       if (!PropertyList.parse(builder)) {
         builder.error("Expecting PropertyList");
       }
