@@ -104,11 +104,11 @@ public class Literals {
   public static boolean parseCollection(PsiBuilder builder) {
     if (ParserUtils.getToken(builder, SparqlTokenTypes.OP_LROUND)) {
 
-      if (!GraphNode.parse(builder)) {
-        builder.error("Expecting Graph Node");
-      } else {
+      if (GraphNode.parse(builder)) {
         //noinspection StatementWithEmptyBody
         while (GraphNode.parse(builder)) ;
+      } else {
+        builder.error("Expecting Graph Node");
       }
 
       ParserUtils.getToken(builder, SparqlTokenTypes.OP_RROUND, "Expecting ')'");
