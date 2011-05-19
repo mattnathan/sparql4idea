@@ -2,7 +2,6 @@ package com.mn.plug.idea.sparql4idea.lang.parser.parsing.lit;
 
 import com.intellij.lang.PsiBuilder;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
-import com.mn.plug.idea.sparql4idea.lang.parser.SparqlElementTypes;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.graph.GraphNode;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.graph.Graphs;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
@@ -47,10 +46,15 @@ public class Literals {
   }
 
   public static boolean parseNumericLiteral(PsiBuilder builder) {
+    return parseNumericLiteralUnsigned(builder) ||
+            parseNumericLiteralNeg(builder) ||
+            parseNumericLiteralPos(builder);
+  }
+
+  public static boolean parseNumericLiteralUnsigned(PsiBuilder builder) {
     return ParserUtils.getToken(builder, SparqlTokenTypes.LIT_INTEGER) ||
             ParserUtils.getToken(builder, SparqlTokenTypes.LIT_DECIMAL) ||
-            ParserUtils.getToken(builder, SparqlTokenTypes.LIT_DOUBLE) ||
-            parseNumericLiteralNeg(builder) || parseNumericLiteralPos(builder);
+            ParserUtils.getToken(builder, SparqlTokenTypes.LIT_DOUBLE);
   }
 
   public static boolean parseNumericLiteralPos(PsiBuilder builder) {
