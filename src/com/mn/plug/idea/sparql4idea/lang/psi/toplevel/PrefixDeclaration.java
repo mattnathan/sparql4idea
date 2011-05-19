@@ -2,8 +2,6 @@ package com.mn.plug.idea.sparql4idea.lang.psi.toplevel;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
 import com.mn.plug.idea.sparql4idea.lang.psi.IriPsiElement;
 import com.mn.plug.idea.sparql4idea.lang.psi.PNameNsDeclaration;
 import org.jetbrains.annotations.NotNull;
@@ -20,17 +18,25 @@ public class PrefixDeclaration extends ASTWrapperPsiElement {
   }
 
   public String getNsLabel() {
-    final PNameNsDeclaration ns = findChildByClass(PNameNsDeclaration.class);
+    final PNameNsDeclaration ns = getNs();
     return ns == null ? "" : ns.getName();
   }
 
-  public String getIri() {
-    final IriPsiElement iriElem = findChildByClass(IriPsiElement.class);
+  public PNameNsDeclaration getNs() {
+    return findChildByClass(PNameNsDeclaration.class);
+  }
+
+  public String getIriValue() {
+    final IriPsiElement iriElem = getIri();
     return iriElem == null ? "" : iriElem.getIri();
+  }
+
+  private IriPsiElement getIri() {
+    return findChildByClass(IriPsiElement.class);
   }
 
   @Override
   public String toString() {
-    return "PrefixDeclaration(" + getNsLabel() + ", " + getIri() + ")";
+    return "PrefixDeclaration(" + getNsLabel() + ", " + getIriValue() + ")";
   }
 }
