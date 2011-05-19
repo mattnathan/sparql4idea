@@ -19,16 +19,20 @@ public class DatasetClause {
     if (ParserUtils.lookAhead(builder, SparqlTokenTypes.KW_FROM)) {
       final PsiBuilder.Marker datasetClause = builder.mark();
       if (ParserUtils.getToken(builder, SparqlTokenTypes.KW_FROM, "Expecting \"FROM\"")) {
-        ParserUtils.getToken(builder, KW_NAMED); // 'NAMED'?
-
-        if (!Literals.parseIriRef(builder)) {
-          builder.error("Expecting IRIref");
-        }
+        parseDefaultGraphClause(builder);
       }
 
       datasetClause.done(DATASET_CLAUSE);
       return true;
     }
     return false;
+  }
+
+  private static void parseDefaultGraphClause(PsiBuilder builder) {
+    ParserUtils.getToken(builder, KW_NAMED); // 'NAMED'?
+
+    if (!Literals.parseIriRef(builder)) {
+      builder.error("Expecting IRIref");
+    }
   }
 }
