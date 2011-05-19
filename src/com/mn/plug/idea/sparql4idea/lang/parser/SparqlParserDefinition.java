@@ -17,7 +17,7 @@ import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
 import com.mn.plug.idea.sparql4idea.lang.psi.IriPsiElement;
 import com.mn.plug.idea.sparql4idea.lang.psi.SparqlFileImpl;
 import com.mn.plug.idea.sparql4idea.lang.psi.VariablePsiElement;
-import com.mn.plug.idea.sparql4idea.lang.psi.toplevel.PrefixPsiElement;
+import com.mn.plug.idea.sparql4idea.lang.psi.toplevel.PrefixDeclaration;
 import org.jetbrains.annotations.NotNull;
 
 import static com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypeSets.*;
@@ -69,7 +69,7 @@ public class SparqlParserDefinition implements ParserDefinition {
   @Override
   public PsiElement createElement(ASTNode astNode) {
     if (astNode.getElementType() == SparqlElementTypes.PREFIX_DECL) {
-      return new PrefixPsiElement(astNode);
+      return new PrefixDeclaration(astNode);
     } else if (astNode.getElementType() == SparqlTokenTypes.VAR) {
       return new VariablePsiElement(astNode);
     } else if (astNode.getElementType() == SparqlTokenTypes.LIT_IRI) {

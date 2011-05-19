@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Matt Nathan
  */
-public class PrefixPsiElement extends ASTWrapperPsiElement {
+public class PrefixDeclaration extends ASTWrapperPsiElement {
 
-  public PrefixPsiElement(@NotNull ASTNode node) {
+  public PrefixDeclaration(@NotNull ASTNode node) {
     super(node);
   }
 
