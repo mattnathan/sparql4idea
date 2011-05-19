@@ -4,7 +4,6 @@ import com.intellij.lang.PsiBuilder;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
 import com.mn.plug.idea.sparql4idea.lang.parser.SparqlElementTypes;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.lit.Literals;
-import com.mn.plug.idea.sparql4idea.lang.parser.parsing.lit.PNameNS;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
 
 /**
@@ -19,10 +18,12 @@ public class PrefixDecl {
       final PsiBuilder.Marker prefixDecl = builder.mark();
 
       if (ParserUtils.getToken(builder, SparqlTokenTypes.KW_PREFIX, "Expecing \"PREFIX\"")) {
-        if (PNameNS.parse(builder)) {
+        if (Literals.parsePNameNs(builder)) {
           if (!Literals.parseIri(builder)) {
             builder.error("Expecting Iri");
           }
+        } else {
+          builder.error("Expecting prefix namespace (e.g. \"myName:\")");
         }
       }
 

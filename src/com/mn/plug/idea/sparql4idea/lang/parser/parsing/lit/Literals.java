@@ -31,10 +31,18 @@ public class Literals {
     return false;
   }
 
-  private static boolean parsePrefixedName(PsiBuilder builder) {
+  public static boolean parsePrefixedName(PsiBuilder builder) {
     if (ParserUtils.getToken(builder, SparqlTokenTypes.LIT_PNAME_LN)) {
       return true;
-    } else if (ParserUtils.getToken(builder, SparqlTokenTypes.LIT_PNAME_NS)) {
+    } else if (parsePNameNs(builder)) {
+      return true;
+    }
+    return false;
+  }
+
+  public static boolean parsePNameNs(PsiBuilder builder) {
+    if (ParserUtils.lookAhead(builder, SparqlTokenTypes.LIT_PNAME_NS)) {
+      ParserUtils.eatElement(builder, SparqlTokenTypes.LIT_PNAME_NS);
       return true;
     }
     return false;

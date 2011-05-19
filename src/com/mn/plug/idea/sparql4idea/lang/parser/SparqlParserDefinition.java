@@ -15,6 +15,7 @@ import com.mn.plug.idea.sparql4idea.SparqlFileType;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlLexer;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
 import com.mn.plug.idea.sparql4idea.lang.psi.IriPsiElement;
+import com.mn.plug.idea.sparql4idea.lang.psi.PNameNsDeclaration;
 import com.mn.plug.idea.sparql4idea.lang.psi.SparqlFileImpl;
 import com.mn.plug.idea.sparql4idea.lang.psi.VariablePsiElement;
 import com.mn.plug.idea.sparql4idea.lang.psi.toplevel.PrefixDeclaration;
@@ -74,6 +75,8 @@ public class SparqlParserDefinition implements ParserDefinition {
       return new VariablePsiElement(astNode);
     } else if (astNode.getElementType() == SparqlTokenTypes.LIT_IRI) {
       return new IriPsiElement(astNode);
+    } else if (astNode.getElementType() == SparqlTokenTypes.LIT_PNAME_NS) {
+      return new PNameNsDeclaration(astNode);
     }
 
     return new ASTWrapperPsiElement(astNode);

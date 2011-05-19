@@ -5,6 +5,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
 import com.mn.plug.idea.sparql4idea.lang.psi.IriPsiElement;
+import com.mn.plug.idea.sparql4idea.lang.psi.PNameNsDeclaration;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -19,12 +20,8 @@ public class PrefixDeclaration extends ASTWrapperPsiElement {
   }
 
   public String getNsLabel() {
-    final PsiElement nsElem = findChildByType(SparqlTokenTypes.LIT_PNAME_NS);
-    if (nsElem != null) {
-      final String text = nsElem.getText();
-      return text.substring(0, text.length() - 1);
-    }
-    return "";
+    final PNameNsDeclaration ns = findChildByClass(PNameNsDeclaration.class);
+    return ns == null ? "" : ns.getName();
   }
 
   public String getIri() {
