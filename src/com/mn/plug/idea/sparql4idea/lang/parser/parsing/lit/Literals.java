@@ -90,7 +90,11 @@ public class Literals {
   }
 
   public static boolean parseVar(PsiBuilder builder) {
-    return ParserUtils.getToken(builder, SparqlTokenTypes.VAR);
+    if (ParserUtils.lookAhead(builder, SparqlTokenTypes.VAR)) {
+      ParserUtils.eatElement(builder, SparqlTokenTypes.VAR);
+      return true;
+    }
+    return false;
   }
 
   public static boolean parseVarOrTerm(PsiBuilder builder) {
