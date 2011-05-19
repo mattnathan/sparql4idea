@@ -37,4 +37,5 @@ public interface SparqlElementTypes {
   IElementType OPTIONAL_GRAPH = new SparqlElementType("OPTIONAL_GRAPH");
   IElementType GRAPH_GRAPH = new SparqlElementType("GRAPH_GRAPH");
   IElementType UNION_GRAPH = new SparqlElementType("UNION_GRAPH");
+  IElementType FILTER = new SparqlElementType("FILTER");
 }
