@@ -2,6 +2,7 @@ package com.mn.plug.idea.sparql4idea.lang.parser.parsing.lit;
 
 import com.intellij.lang.PsiBuilder;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
+import com.mn.plug.idea.sparql4idea.lang.parser.SparqlElementTypes;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.graph.GraphNode;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.graph.Graphs;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
@@ -102,16 +103,20 @@ public class Literals {
   }
 
   public static boolean parseCollection(PsiBuilder builder) {
-    if (ParserUtils.getToken(builder, SparqlTokenTypes.OP_LROUND)) {
+    if (ParserUtils.lookAhead(builder, SparqlTokenTypes.OP_LROUND)) {
+      final PsiBuilder.Marker collection = builder.mark();
+      if (ParserUtils.getToken(builder, SparqlTokenTypes.OP_LROUND)) {
 
-      if (GraphNode.parse(builder)) {
-        //noinspection StatementWithEmptyBody
-        while (GraphNode.parse(builder)) ;
-      } else {
-        builder.error("Expecting Graph Node");
+        if (GraphNode.parse(builder)) {
+          //noinspection StatementWithEmptyBody
+          while (GraphNode.parse(builder)) ;
+        } else {
+          builder.error("Expecting Graph Node");
+        }
+
+        ParserUtils.getToken(builder, SparqlTokenTypes.OP_RROUND, "Expecting ')'");
       }
-
-      ParserUtils.getToken(builder, SparqlTokenTypes.OP_RROUND, "Expecting ')'");
+      collection.done(SparqlElementTypes.COLLECTION);
       return true;
     }
     return false;
