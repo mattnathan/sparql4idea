@@ -2,6 +2,7 @@ package com.mn.plug.idea.sparql4idea.lang.parser.parsing.common;
 
 import com.intellij.lang.PsiBuilder;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
+import com.mn.plug.idea.sparql4idea.lang.parser.SparqlElementTypes;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.graph.GraphNode;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.lit.Verb;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
@@ -31,14 +32,19 @@ public class PropertyList {
   }
 
   private static boolean parseObjectList(PsiBuilder builder) {
+    final PsiBuilder.Marker objectList = builder.mark();
     if (GraphNode.parse(builder)) {
       while (ParserUtils.getToken(builder, SparqlTokenTypes.OP_COMMA)) {
         if (!GraphNode.parse(builder)) {
           builder.error("Expecting GraphNode");
         }
       }
+      objectList.done(SparqlElementTypes.OBJECT_LIST);
       return true;
+    } else {
+      builder.error("Expecting GraphNode");
     }
+    objectList.drop();
     return false;
   }
 
