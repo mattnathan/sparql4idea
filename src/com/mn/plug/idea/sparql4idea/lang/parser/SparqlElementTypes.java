@@ -11,6 +11,7 @@ import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlElementType;
 public interface SparqlElementTypes {
   IElementType BASE_DECL = new SparqlElementType("BASE_DECL");
   IElementType PREFIX_DECL = new SparqlElementType("PREFIX_DECL");
+  IElementType PREFIX_DECLS = new SparqlElementType("PREFIX_DECLS");
 
   IElementType SELECT_QUERY = new SparqlElementType("SELECT_QUERY");
   IElementType PROJECTION_VARIABLES = new SparqlElementType("PROJECTION_VARIABLES");
