@@ -25,6 +25,8 @@
     <lang.parserDefinition language="SPARQL"
                            implementationClass="com.mn.plug.idea.sparql4idea.lang.parser.SparqlParserDefinition" />
     <lang.commenter language="SPARQL" implementationClass="com.mn.plug.idea.sparql4idea.highlight.SparqlCommenter" />
+    <lang.braceMatcher language="SPARQL"
+                       implementationClass="com.mn.plug.idea.sparql4idea.highlight.SparqlBraceMatcher" />
 
     <fileTemplateGroup implementation="com.mn.plug.idea.sparql4idea.actions.SparqlFileTemplatesFactory" />
   </extensions>
