@@ -7,7 +7,8 @@
   <ul>
     <li>Basic code parsing and highlighting</li>
     <li>Brace matching</li>
-    <li>[feature] Code folding for PREFIX and {} blocks</li>
+    <li>Code folding for PREFIX and {} blocks</li>
+    <li>Find Usages (namespaces)</li>
     <li>Comment/Uncomment support</li>
     <li>Go to declaration for namespaces</li>
     <li>Simple file templates for select and ask queries</li>
@@ -17,6 +18,7 @@
   <h3>0.1.2</h3>
   <ul>
     <li>[feature] Code folding for PREFIX and {} blocks</li>
+    <li>[feature] Find Usages (namespaces)</li>
   </ul>
   <h3>0.1.1</h3>
   <ul>
