@@ -1,7 +1,30 @@
 <idea-plugin version="2">
   <name>sparql4idea</name>
-  <description>SPARQL language plugin</description>
-  <version>0.1</version>
+  <version>0.1.1</version>
+  <description><![CDATA[
+  <p>IntelliJ IDEA support for the SPARQL query language.</p>
+  <p>This plugin provides the following features:<p>
+  <ul>
+    <li>Basic code parsing and highlighting</li>
+    <li>Brace matching</li>
+    <li>Comment/Uncomment support</li>
+    <li>Go to declaration for namespaces</li>
+    <li>Simple file templates for select and ask queries</li>
+  </uul>
+  ]]></description>
+  <change-notes><![CDATA[
+  <h3>0.1.1</h3>
+  <ul>
+    <li>[feature] Brace matching</li>
+    <li>[feature] Go to declaration for namespaces</li>
+  </ul>
+  <h3>0.1.0</h3>
+  <ul>
+    <li>[feature] Basic code parsing and highlighting</li>
+    <li>[feature] Comment/Uncomment support</li>
+    <li>[feature] Simple file templates for select and ask queries</li>
+  </ul>
+  ]]></change-notes>
   <vendor>Matt Nathan</vendor>
   <idea-version since-build="8000" />
   <category>Custom Languages</category>
