@@ -57,6 +57,8 @@
                        implementationClass="com.mn.plug.idea.sparql4idea.highlight.SparqlBraceMatcher" />
     <lang.foldingBuilder language="SPARQL"
                          implementationClass="com.mn.plug.idea.sparql4idea.lang.folding.SparqlFoldingBuilder" />
+    <lang.findUsagesProvider language="SPARQL"
+                             implementationClass="com.mn.plug.idea.sparql4idea.lang.findUsages.SparqlFindUsagesProvider" />
 
     <fileTemplateGroup implementation="com.mn.plug.idea.sparql4idea.actions.SparqlFileTemplatesFactory" />
   </extensions>

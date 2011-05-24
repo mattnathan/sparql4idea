@@ -16,6 +16,7 @@ import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlLexer;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
 import com.mn.plug.idea.sparql4idea.lang.psi.*;
 import com.mn.plug.idea.sparql4idea.lang.psi.toplevel.PrefixDeclaration;
+import com.mn.plug.idea.sparql4idea.lang.psi.toplevel.PrefixDeclarations;
 import org.jetbrains.annotations.NotNull;
 
 import static com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypeSets.*;
@@ -76,6 +77,8 @@ public class SparqlParserDefinition implements ParserDefinition {
       return new PNameNsDeclaration(astNode);
     } else if (astNode.getElementType() == SparqlElementTypes.PNAME) {
       return new PNameExpression(astNode);
+    } else if (astNode.getElementType() == SparqlElementTypes.PREFIX_DECLS) {
+      return new PrefixDeclarations(astNode);
     }
 
     return new ASTWrapperPsiElement(astNode);
