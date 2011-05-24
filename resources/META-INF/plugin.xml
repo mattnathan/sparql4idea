@@ -25,7 +25,7 @@
     <li>[feature] Simple file templates for select and ask queries</li>
   </ul>
   ]]></change-notes>
-  <vendor>Matt Nathan</vendor>
+  <vendor email="matt.nathan+ideaplug@gmail.com" url="http://github.com/mattnathan/">Matt Nathan</vendor>
   <idea-version since-build="8000" />
   <category>Custom Languages</category>
 
