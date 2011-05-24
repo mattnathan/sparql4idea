@@ -10,6 +10,7 @@ import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlLexer;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypeSets;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
 import com.mn.plug.idea.sparql4idea.lang.psi.PNameNsDeclaration;
+import com.mn.plug.idea.sparql4idea.lang.psi.VariablePsiElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -24,12 +25,13 @@ public class SparqlFindUsagesProvider implements FindUsagesProvider {
     return new DefaultWordsScanner(new SparqlLexer(),
             TokenSet.create(SparqlTokenTypes.LIT_PNAME_LN, SparqlTokenTypes.LIT_PNAME_NS, SparqlTokenTypes.VAR),
             SparqlTokenTypeSets.COMMENTS,
-            TokenSet.create());
+            TokenSet.andSet(SparqlTokenTypeSets.NUMBER_LITERALS, SparqlTokenTypeSets.STRING_LITERALS));
   }
 
   @Override
   public boolean canFindUsagesFor(@NotNull PsiElement psiElement) {
-    return psiElement instanceof PNameNsDeclaration;
+    return psiElement instanceof PNameNsDeclaration ||
+            psiElement instanceof VariablePsiElement;
   }
 
   @Override
