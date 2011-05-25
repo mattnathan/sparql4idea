@@ -19,6 +19,7 @@
   <ul>
     <li>[feature] Code folding for PREFIX and {} blocks</li>
     <li>[feature] Find Usages (namespaces)</li>
+    <li>[bugfix] Fixed the problem with PREFIX declaration and the whitespace between the my: and the &lt;uri&gt;</li>
   </ul>
   <h3>0.1.1</h3>
   <ul>
