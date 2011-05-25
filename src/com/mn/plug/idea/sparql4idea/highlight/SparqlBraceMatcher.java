@@ -19,6 +19,7 @@ public class SparqlBraceMatcher implements PairedBraceMatcher {
           new BracePair(SparqlTokenTypes.OP_LCURLY, SparqlTokenTypes.OP_RCURLY, true),
           new BracePair(SparqlTokenTypes.OP_LROUND, SparqlTokenTypes.OP_RROUND, true),
           new BracePair(SparqlTokenTypes.OP_LSQUARE, SparqlTokenTypes.OP_RSQUARE, false),
+          new BracePair(SparqlTokenTypes.LIT_IRI_START, SparqlTokenTypes.LIT_IRI_END, false),
   };
 
   @Override
