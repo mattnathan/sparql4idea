@@ -18,12 +18,11 @@ public class IriPsiElement extends ASTWrapperPsiElement {
   }
 
   public String getIri() {
-    final PsiElement iri = findChildByType(SparqlTokenTypes.LIT_IRI);
+    final PsiElement iri = findChildByType(SparqlTokenTypes.LIT_IRI_BODY);
     if (iri == null) {
       return "";
     }
-    final String text = iri.getText();
-    return text.substring(1, text.length() - 1);
+    return iri.getText();
   }
 
   @Override
