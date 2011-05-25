@@ -24,8 +24,14 @@ public class Literals {
   }
 
   public static boolean parseIri(PsiBuilder builder) {
-    if (ParserUtils.lookAhead(builder, SparqlTokenTypes.LIT_IRI)) {
-      ParserUtils.eatElement(builder, SparqlTokenTypes.LIT_IRI);
+    if (ParserUtils.lookAhead(builder, SparqlTokenTypes.LIT_IRI_START)) {
+      final PsiBuilder.Marker iri = builder.mark();
+      if (ParserUtils.getToken(builder, SparqlTokenTypes.LIT_IRI_START, "Expecting '<'")) {
+        if (ParserUtils.getToken(builder, SparqlTokenTypes.LIT_IRI_BODY, "Expecting IRI body")) {
+          ParserUtils.getToken(builder, SparqlTokenTypes.LIT_IRI_END, "Expecting '>'");
+        }
+      }
+      iri.done(SparqlTokenTypes.LIT_IRI);
       return true;
     }
     return false;

@@ -15,8 +15,8 @@ import static com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes.*;
 %function advance
 %type IElementType
 
-
-IRI_REF = "<"([^\<\>\"\{\}\|\^\`\\\x00-\x20])*">"
+IRI_REF_BODY = ([^\<\>\"\{\}\|\^\`\\\x00-\x20])*
+IRI_REF = "<"{IRI_REF_BODY}">"
 PNAME_NS = {PN_PREFIX}? ":"
 PNAME_LN = {PNAME_NS} {PN_LOCAL}
 BLANK_NODE_LABEL = "_:" {PN_LOCAL}
@@ -61,6 +61,9 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
 %x PNAME_NS
 %x PNAME_LN
 %x PNAME_LN2
+
+%x IRI_REF_BODY
+%x IRI_REF_END
 
 %%
 
@@ -137,7 +140,7 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
   "!" { return OP_NOT; }
   "^^" { return OP_HATHAT; }
 
-  {IRI_REF} { return LIT_IRI; }
+  "<"/{IRI_REF_BODY}">" { yybegin(IRI_REF_BODY); return LIT_IRI_START; }
   {PNAME_LN} { yypushback(yylength()); yybegin(PNAME_LN); }
   {PNAME_NS} { yypushback(yylength()); yybegin(PNAME_NS); }
   {BLANK_NODE_LABEL} { return LIT_BLANK_NODE; }
@@ -164,6 +167,16 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
 }
 <PNAME_LN2> {
 	{PN_LOCAL} { yybegin(YYINITIAL); return NAME_LN; }
+	[^] { yybegin(YYINITIAL); return BAD_CHARACTER; }
+}
+
+<IRI_REF_BODY> {
+  {IRI_REF_BODY} { yybegin(IRI_REF_END); return LIT_IRI_BODY; }
+	">" { yybegin(YYINITIAL); return LIT_IRI_END; }
+	[^] { yybegin(YYINITIAL); return BAD_CHARACTER; }
+}
+<IRI_REF_END> {
+	">" { yybegin(YYINITIAL); return LIT_IRI_END; }
 	[^] { yybegin(YYINITIAL); return BAD_CHARACTER; }
 }
 

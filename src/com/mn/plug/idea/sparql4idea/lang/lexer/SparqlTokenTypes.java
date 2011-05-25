@@ -63,6 +63,9 @@ public interface SparqlTokenTypes {
   IElementType LIT_DECIMAL_NEG = new SparqlElementType("-DECIMAL");
   IElementType LIT_DOUBLE_NEG = new SparqlElementType("-DOUBLE");
   IElementType LIT_IRI = new SparqlElementType("IRI");
+  IElementType LIT_IRI_START = new SparqlElementType("IRI_START");
+  IElementType LIT_IRI_BODY = new SparqlElementType("IRI_BODY");
+  IElementType LIT_IRI_END = new SparqlElementType("IRI_END");
   IElementType LIT_PNAME_LN = new SparqlElementType("PNAME_NS");
   IElementType LIT_PNAME_NS = new SparqlElementType("PNAME_LN");
   IElementType LIT_BLANK_NODE = new SparqlElementType("BLANK_NODE");
