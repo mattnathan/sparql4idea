@@ -181,5 +181,5 @@ PN_LOCAL = ( {PN_CHARS_U} | [0-9] ) (({PN_CHARS}|".")* {PN_CHARS})?
 }
 
 {WS} { return WHITE_SPACE; }
-[a-zA-Z]+ { return UNKNOWN; }
+[:letter:]+ { return UNKNOWN; }
 [^] { return BAD_CHARACTER; }
