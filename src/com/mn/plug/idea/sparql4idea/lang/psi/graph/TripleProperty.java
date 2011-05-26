@@ -6,26 +6,22 @@ import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Triples block
+ * Triple property
  *
  * @author Matt Nathan
  */
-public class TripleBlock extends ASTWrapperPsiElement {
+public class TripleProperty extends ASTWrapperPsiElement {
 
-  public TripleBlock(@NotNull ASTNode node) {
+  public TripleProperty(@NotNull ASTNode node) {
     super(node);
   }
 
-  public PsiElement getSubject() {
+  public PsiElement getPredicate() {
     return getFirstChild();
-  }
-
-  public TripleProperty[] getPropertyList() {
-    return findChildrenByClass(TripleProperty.class);
   }
 
   @Override
   public String toString() {
-    return "TriplesBlock(" + getSubject() + " ...)";
+    return "TripleProperty(" + getPredicate() + " ...)";
   }
 }

@@ -20,6 +20,7 @@ import com.mn.plug.idea.sparql4idea.lang.psi.expressions.VariableBase;
 import com.mn.plug.idea.sparql4idea.lang.psi.expressions.VariableDeclaration;
 import com.mn.plug.idea.sparql4idea.lang.psi.expressions.VariableReference;
 import com.mn.plug.idea.sparql4idea.lang.psi.graph.TripleBlock;
+import com.mn.plug.idea.sparql4idea.lang.psi.graph.TripleProperty;
 import com.mn.plug.idea.sparql4idea.lang.psi.query.SelectQuery;
 import com.mn.plug.idea.sparql4idea.lang.psi.query.WhereClause;
 import com.mn.plug.idea.sparql4idea.lang.psi.toplevel.PrefixDeclaration;
@@ -96,6 +97,8 @@ public class SparqlParserDefinition implements ParserDefinition {
       return new WhereClause(astNode);
     } else if (astNode.getElementType() == SparqlElementTypes.TRIPLES_BLOCK) {
       return new TripleBlock(astNode);
+    } else if (astNode.getElementType() == SparqlElementTypes.TRIPLE_PROPERTY) {
+      return new TripleProperty(astNode);
     }
 
     return new ASTWrapperPsiElement(astNode);
