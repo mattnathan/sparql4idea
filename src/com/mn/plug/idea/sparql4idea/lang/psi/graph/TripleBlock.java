@@ -2,6 +2,7 @@ package com.mn.plug.idea.sparql4idea.lang.psi.graph;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.mn.plug.idea.sparql4idea.lang.psi.expressions.VariableDeclaration;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,8 +17,8 @@ public class TripleBlock extends ASTWrapperPsiElement {
     super(node);
   }
 
-  public VariableDeclaration getSubject() {
-    return findChildByClass(VariableDeclaration.class);
+  public PsiElement getSubject() {
+    return getFirstChild();
   }
 
   @Override
