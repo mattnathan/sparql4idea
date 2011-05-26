@@ -1,10 +1,11 @@
-package com.mn.plug.idea.sparql4idea.lang.psi;
+package com.mn.plug.idea.sparql4idea.lang.psi.expressions;
 
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
+import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.*;
 import com.intellij.util.IncorrectOperationException;
+import com.mn.plug.idea.sparql4idea.lang.psi.VariableList;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,15 +14,15 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Matt Nathan
  */
-public class VariablePsiElement extends ASTWrapperPsiElement implements PsiNamedElement {
+public abstract class VariableBase extends ASTWrapperPsiElement implements PsiNamedElement {
 
-  public VariablePsiElement(@NotNull ASTNode node) {
+  public VariableBase(@NotNull ASTNode node) {
     super(node);
   }
 
   @Override
   public String toString() {
-    return "Variable(" + getVarName() + ")";
+    return getClass().getSimpleName() + "(" + getVarName() + ")";
   }
 
   public String getVarName() {

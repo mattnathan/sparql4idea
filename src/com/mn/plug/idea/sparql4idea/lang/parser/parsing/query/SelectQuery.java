@@ -47,9 +47,9 @@ public class SelectQuery {
 
     if (ParserUtils.getToken(builder, OP_MULT)) {
       // we have parsed all needed tokens
-    } else if (Literals.parseVar(builder)) {
+    } else if (Literals.parseVar(builder, true)) {
       //noinspection StatementWithEmptyBody
-      while (Literals.parseVar(builder)) ;
+      while (Literals.parseVar(builder, true)) ;
     } else {
       builder.error("Expecting Variable or *");
     }

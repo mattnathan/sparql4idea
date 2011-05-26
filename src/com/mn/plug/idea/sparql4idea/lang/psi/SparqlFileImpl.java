@@ -2,9 +2,9 @@ package com.mn.plug.idea.sparql4idea.lang.psi;
 
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
+import com.intellij.psi.*;
+import com.intellij.psi.scope.PsiScopeProcessor;
+import com.intellij.psi.search.PsiElementProcessor;
 import com.mn.plug.idea.sparql4idea.SparqlFileType;
 import com.mn.plug.idea.sparql4idea.lang.parser.SparqlElementTypes;
 import com.mn.plug.idea.sparql4idea.lang.psi.toplevel.PrefixDeclaration;
@@ -33,5 +33,17 @@ public class SparqlFileImpl extends PsiFileBase {
   public PrefixDeclaration[] getPrefixDeclarations() {
     final PrefixDeclarations prefixes = findChildByClass(PrefixDeclarations.class);
     return prefixes == null ? PREFIX_DECLARATIONS : prefixes.getPrefixDeclarations();
+  }
+
+  @Override
+  public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place) {
+    for (PrefixDeclaration declaration : getPrefixDeclarations()) {
+      if (declaration != lastParent) {
+        if (!declaration.processDeclarations(processor, state, lastParent, place)) {
+          return false;
+        }
+      }
+    }
+    return super.processDeclarations(processor, state, lastParent, place);
   }
 }

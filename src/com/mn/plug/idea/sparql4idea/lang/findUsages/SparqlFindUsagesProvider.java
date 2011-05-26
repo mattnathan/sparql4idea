@@ -10,7 +10,7 @@ import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlLexer;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypeSets;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
 import com.mn.plug.idea.sparql4idea.lang.psi.PNameNsDeclaration;
-import com.mn.plug.idea.sparql4idea.lang.psi.VariablePsiElement;
+import com.mn.plug.idea.sparql4idea.lang.psi.expressions.VariableBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -31,7 +31,7 @@ public class SparqlFindUsagesProvider implements FindUsagesProvider {
   @Override
   public boolean canFindUsagesFor(@NotNull PsiElement psiElement) {
     return psiElement instanceof PNameNsDeclaration ||
-            psiElement instanceof VariablePsiElement;
+            psiElement instanceof VariableBase;
   }
 
   @Override
@@ -42,6 +42,9 @@ public class SparqlFindUsagesProvider implements FindUsagesProvider {
   @NotNull
   @Override
   public String getType(@NotNull PsiElement element) {
+    if (element instanceof PNameNsDeclaration) {
+      return "Namespace";
+    }
     return "";
   }
 

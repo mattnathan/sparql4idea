@@ -42,4 +42,6 @@ public interface SparqlElementTypes {
   IElementType CONSTRUCT_TEMPLATE = new SparqlElementType("CONSTRUCT_TEMPLATE");
 
   IElementType PNAME = new SparqlElementType("PNAME");
+  IElementType VAR_DECLARATION = new SparqlElementType("VAR_DECLARATION");
+  IElementType VAR_REFERENCE = new SparqlElementType("VAR_REFERENCE");
 }
