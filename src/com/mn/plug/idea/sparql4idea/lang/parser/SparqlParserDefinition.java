@@ -19,6 +19,7 @@ import com.mn.plug.idea.sparql4idea.lang.psi.expressions.VariableBase;
 import com.mn.plug.idea.sparql4idea.lang.psi.expressions.VariableDeclaration;
 import com.mn.plug.idea.sparql4idea.lang.psi.expressions.VariableReference;
 import com.mn.plug.idea.sparql4idea.lang.psi.query.SelectQuery;
+import com.mn.plug.idea.sparql4idea.lang.psi.query.WhereClause;
 import com.mn.plug.idea.sparql4idea.lang.psi.toplevel.PrefixDeclaration;
 import com.mn.plug.idea.sparql4idea.lang.psi.toplevel.PrefixDeclarations;
 import org.jetbrains.annotations.NotNull;
@@ -89,6 +90,8 @@ public class SparqlParserDefinition implements ParserDefinition {
       return new VariableList(astNode);
     } else if (astNode.getElementType() == SparqlElementTypes.SELECT_QUERY) {
       return new SelectQuery(astNode);
+    } else if (astNode.getElementType() == SparqlElementTypes.WHERE_CLAUSE) {
+      return new WhereClause(astNode);
     }
 
     return new ASTWrapperPsiElement(astNode);

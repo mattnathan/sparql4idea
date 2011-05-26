@@ -7,7 +7,7 @@ import com.mn.plug.idea.sparql4idea.lang.psi.expressions.VariableBase;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Generated JavaDoc Comment.
+ * Select query
  *
  * @author Matt Nathan
  */
@@ -25,6 +25,10 @@ public class SelectQuery extends ASTWrapperPsiElement {
       return variableList.getVariables();
     }
     return VARIABLE_PSI_ELEMENTS;
+  }
+
+  public WhereClause getWhereClause() {
+    return findChildByClass(WhereClause.class);
   }
 
   @Override
