@@ -4,7 +4,6 @@ import com.intellij.lang.PsiBuilder;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
 import com.mn.plug.idea.sparql4idea.lang.parser.SparqlElementTypes;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.common.Filter;
-import com.mn.plug.idea.sparql4idea.lang.parser.parsing.common.Triples;
 import com.mn.plug.idea.sparql4idea.lang.parser.parsing.util.ParserUtils;
 
 /**
