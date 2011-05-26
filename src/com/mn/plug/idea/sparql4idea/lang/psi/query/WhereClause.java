@@ -14,4 +14,9 @@ public class WhereClause extends ASTWrapperPsiElement {
   public WhereClause(@NotNull ASTNode node) {
     super(node);
   }
+
+  @Override
+  public String toString() {
+    return "Where( ... )";
+  }
 }
