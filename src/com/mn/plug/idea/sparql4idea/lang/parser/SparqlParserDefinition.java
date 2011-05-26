@@ -9,6 +9,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.StringEscapesTokenTypes;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.mn.plug.idea.sparql4idea.SparqlFileType;
@@ -18,6 +19,7 @@ import com.mn.plug.idea.sparql4idea.lang.psi.*;
 import com.mn.plug.idea.sparql4idea.lang.psi.expressions.VariableBase;
 import com.mn.plug.idea.sparql4idea.lang.psi.expressions.VariableDeclaration;
 import com.mn.plug.idea.sparql4idea.lang.psi.expressions.VariableReference;
+import com.mn.plug.idea.sparql4idea.lang.psi.graph.TripleBlock;
 import com.mn.plug.idea.sparql4idea.lang.psi.query.SelectQuery;
 import com.mn.plug.idea.sparql4idea.lang.psi.query.WhereClause;
 import com.mn.plug.idea.sparql4idea.lang.psi.toplevel.PrefixDeclaration;
@@ -92,6 +94,8 @@ public class SparqlParserDefinition implements ParserDefinition {
       return new SelectQuery(astNode);
     } else if (astNode.getElementType() == SparqlElementTypes.WHERE_CLAUSE) {
       return new WhereClause(astNode);
+    } else if (astNode.getElementType() == SparqlElementTypes.TRIPLES_BLOCK) {
+      return new TripleBlock(astNode);
     }
 
     return new ASTWrapperPsiElement(astNode);
