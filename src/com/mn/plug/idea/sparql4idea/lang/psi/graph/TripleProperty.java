@@ -5,6 +5,8 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+
 /**
  * Triple property
  *
@@ -20,8 +22,12 @@ public class TripleProperty extends ASTWrapperPsiElement {
     return getFirstChild();
   }
 
+  public GraphNode[] getObjects() {
+    return findChildrenByClass(GraphNode.class);
+  }
+
   @Override
   public String toString() {
-    return "TripleProperty(" + getPredicate() + " ...)";
+    return "TripleProperty(" + getPredicate() + " : " + Arrays.toString(getObjects()) + ")";
   }
 }

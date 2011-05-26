@@ -44,4 +44,5 @@ public interface SparqlElementTypes {
   IElementType PNAME = new SparqlElementType("PNAME");
   IElementType VAR_DECLARATION = new SparqlElementType("VAR_DECLARATION");
   IElementType VAR_REFERENCE = new SparqlElementType("VAR_REFERENCE");
+  IElementType GRAPH_NODE = new SparqlElementType("GRAPH_NODE");
 }

@@ -35,19 +35,16 @@ public class PropertyList {
   }
 
   private static boolean parseObjectList(PsiBuilder builder) {
-    final PsiBuilder.Marker objectList = builder.mark();
     if (GraphNode.parse(builder)) {
       while (ParserUtils.getToken(builder, SparqlTokenTypes.OP_COMMA)) {
         if (!GraphNode.parse(builder)) {
           builder.error("Expecting GraphNode");
         }
       }
-      objectList.done(SparqlElementTypes.OBJECT_LIST);
       return true;
     } else {
       builder.error("Expecting GraphNode");
     }
-    objectList.drop();
     return false;
   }
 

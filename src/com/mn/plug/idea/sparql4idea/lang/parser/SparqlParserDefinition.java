@@ -9,16 +9,15 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.StringEscapesTokenTypes;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.mn.plug.idea.sparql4idea.SparqlFileType;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlLexer;
 import com.mn.plug.idea.sparql4idea.lang.lexer.SparqlTokenTypes;
 import com.mn.plug.idea.sparql4idea.lang.psi.*;
-import com.mn.plug.idea.sparql4idea.lang.psi.expressions.VariableBase;
 import com.mn.plug.idea.sparql4idea.lang.psi.expressions.VariableDeclaration;
 import com.mn.plug.idea.sparql4idea.lang.psi.expressions.VariableReference;
+import com.mn.plug.idea.sparql4idea.lang.psi.graph.GraphNode;
 import com.mn.plug.idea.sparql4idea.lang.psi.graph.TripleBlock;
 import com.mn.plug.idea.sparql4idea.lang.psi.graph.TripleProperty;
 import com.mn.plug.idea.sparql4idea.lang.psi.query.SelectQuery;
@@ -99,6 +98,8 @@ public class SparqlParserDefinition implements ParserDefinition {
       return new TripleBlock(astNode);
     } else if (astNode.getElementType() == SparqlElementTypes.TRIPLE_PROPERTY) {
       return new TripleProperty(astNode);
+    } else if (astNode.getElementType() == SparqlElementTypes.GRAPH_NODE) {
+      return new GraphNode(astNode);
     }
 
     return new ASTWrapperPsiElement(astNode);
