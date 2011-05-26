@@ -85,35 +85,35 @@ public class PNameNsDeclaration extends ASTWrapperPsiElement implements PsiNamed
     @NotNull
     @Override
     public String getCanonicalText() {
-      System.out.println("PNameNsDeclaration$NsReference.getCanonicalText");
+//      System.out.println("PNameNsDeclaration$NsReference.getCanonicalText");
       final PNameNsDeclaration reference = getElement();
       return reference == null ? "" : reference.toString();
     }
 
     @Override
     public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
-      System.out.println("PNameNsDeclaration$NsReference.handleElementRename");
+//      System.out.println("PNameNsDeclaration$NsReference.handleElementRename");
       /* @todo Auto-generated method body */
       return null;
     }
 
     @Override
     public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
-      System.out.println("PNameNsDeclaration$NsReference.bindToElement");
+//      System.out.println("PNameNsDeclaration$NsReference.bindToElement");
       /* @todo Auto-generated method body */
       return null;
     }
 
     @Override
     public boolean isReferenceTo(PsiElement element) {
-      System.out.println("PNameNsDeclaration$NsReference.isReferenceTo");
+//      System.out.println("PNameNsDeclaration$NsReference.isReferenceTo");
       return element.getText().equals(getElement().getText()) && element == resolve();
     }
 
     @NotNull
     @Override
     public Object[] getVariants() {
-      System.out.println("PNameNsDeclaration$NsReference.getVariants");
+//      System.out.println("PNameNsDeclaration$NsReference.getVariants");
       PrefixCollector collector = new PrefixCollector();
       PsiScopesUtil.treeWalkUp(collector, getElement(), getElement().getContainingFile());
       return collector.getVariants();
