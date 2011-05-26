@@ -8,9 +8,9 @@
     <li>Basic code parsing and highlighting</li>
     <li>Brace matching</li>
     <li>Code folding for PREFIX and {} blocks</li>
-    <li>Find Usages (namespaces)</li>
+    <li>Find Usages (namespaces, variables)</li>
     <li>Comment/Uncomment support</li>
-    <li>Go to declaration for namespaces</li>
+    <li>Go to declaration for namespaces and variables</li>
     <li>Simple file templates for select and ask queries</li>
   </uul>
   ]]></description>
@@ -18,7 +18,8 @@
   <h3>0.1.2</h3>
   <ul>
     <li>[feature] Code folding for PREFIX and {} blocks</li>
-    <li>[feature] Find Usages (namespaces)</li>
+    <li>[feature] Find Usages (namespaces, variables)</li>
+    <li>[feature] Go to declaration for variables</li>
     <li>[bugfix] Fixed the problem with PREFIX declaration and the whitespace between the my: and the &lt;uri&gt;</li>
   </ul>
   <h3>0.1.1</h3>
